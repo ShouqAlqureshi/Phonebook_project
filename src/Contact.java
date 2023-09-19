@@ -51,7 +51,7 @@ public class Contact implements Comparable<Contact>{
     }
 
     @Override
-    public int compareTo(Contact o) {
+    public int compareTo(Contact o) {//not done yet
         if (this.Name.charAt(0) > o.getName().charAt(0))
         return 1;
         else if (this.Name.charAt(0) == o.getName().charAt(0)){
