@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class Contact implements Comparable<Contact>{
     private String Name,Phone_Number,Email_Address,Birthday,Address;
     String note;
@@ -51,40 +53,31 @@ public class Contact implements Comparable<Contact>{
     }
 
     @Override
-    public int compareTo(Contact o) {//not done yet
-        if (this.Name.charAt(0) > o.getName().charAt(0))
+    public int compareTo(Contact contact) {//tested & done
+        if (this.Name.toUpperCase().charAt(0) > contact.getName().toUpperCase().charAt(0))
         return 1;
-        else if (this.Name.charAt(0) == o.getName().charAt(0)){
+        else if (this.Name.toUpperCase().charAt(0) == contact.getName().toUpperCase().charAt(0)){
             int limit;
-            if(!this.Name.equalsIgnoreCase(o.getName())) {
-                limit = Math.min(this.Name.length(), o.getName().length());
+            if(!this.Name.equalsIgnoreCase(contact.getName())) {
+                limit = Math.min(this.Name.length(), contact.getName().length());
                 for (int i = 1; i < limit; i++) {
-                    if (this.Name.charAt(i) > o.getName().charAt(i));
-                        return 1;//the only case i want to swap and change  so i will ignore -1
+                    if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)){
+                        return 1;//the only case I want to swap and change  so i will ignore -1
+                    } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {
+                        return -1;
+                    }
                 }
             } return 0;
         }else
             return-1;//ascii is arranged alphabetically starting with small num الترتيب تصاعدي
     }
 
-    public void sort(ContactLinkedListADT list) {//not done yet
-        Contact temp;
-        if (list.head.next == null){
-            System.out.println("only one element in list ");
-            return;
-        }else{
-           list.head=list.current;
-           while(list.hasNext()){
-             Contact pre = list.current.data;
-             Contact cur = list.current.next.data;
-             if (pre.compareTo(cur) == 1){//shifting
-                temp=pre;
-                pre=cur;
-                cur=temp;
-             }
-             list.current = list.current.next;
-           }
-
-       }
+    public static void main(String[] args) {//testing area
+        Contact c1=new Contact("bb", "05937636532","jnjnjnj","nnk222","299");
+        Contact c2=new Contact("bb", "7968867456","njnjnj","mmkmkm","klll");
+       int i= c1.compareTo(c2);
+        System.out.println(i);
+        LinkedList list=new LinkedList();
+        list.add(c1);
     }
 }//class
