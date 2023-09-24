@@ -1,9 +1,9 @@
 
-public class phoneBook {
+public class PhoneBook {
 	
 	ContactLinkedListADT list;
 	Contact CLL;
-	event ELL;
+	EventLinkedList ELL;
 	
 	public void scheduleEvent() { //not done yet
 		

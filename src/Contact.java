@@ -1,14 +1,17 @@
+import java.nio.channels.ScatteringByteChannel;
 import java.util.LinkedList;
 
-public class Contact implements Comparable<Contact>{
+public class Contact implements Comparable<Contact> {
     private String Name,Phone_Number,Email_Address,Birthday,Address;
     String note;
+    Contact[] events=new Contact[10];//for events to add composition relation prob is that it's fixed + type of array
 
-    public Contact(String name, String phone_Number, String email_Address, String birthday, String note) {
+    public Contact(String name, String phone_Number, String email_Address, String birthday,String address, String note) {
         setName( name);
         setPhone_Number(phone_Number);
         setEmail_Address(email_Address);
         setBirthday(birthday);
+        setAddress(address);
         this.note = note;
     }
 
@@ -61,20 +64,25 @@ public class Contact implements Comparable<Contact>{
             if(!this.Name.equalsIgnoreCase(contact.getName())) {
                 limit = Math.min(this.Name.length(), contact.getName().length());
                 for (int i = 1; i < limit; i++) {
-                    if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)){
-                        return 1;//the only case I want to swap and change  so i will ignore -1
-                    } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {
-                        return -1;
-                    }
+                   if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)) {
+                      return 1;//the only case I want to swap and change  so i will ignore -1
+                   } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {
+                      return -1;
+                   }
                 }
+                if ( this.Name.length() != contact.getName().length())
+                    return 2;
             } return 0;
         }else
             return-1;//ascii is arranged alphabetically starting with small num الترتيب تصاعدي
     }
 
+    public String toString(){
+        return getClass().getName()+"name: "+getName()+"\tPhone Number:"+getPhone_Number()+"\tAddress: "+getAddress()+"\nEmail_Address: "+getEmail_Address()+"\tBirthday: "+ getBirthday()+"\n note: "+note+"";
+    }
     public static void main(String[] args) {//testing area
-        Contact c1=new Contact("bb", "05937636532","jnjnjnj","nnk222","299");
-        Contact c2=new Contact("bb", "7968867456","njnjnj","mmkmkm","klll");
+        Contact c1=new Contact("bb", "05937636532","jnjnjnj","nnk222","299","njnj");
+        Contact c2=new Contact("bb", "7968867456","njnjnj","mmkmkm","klll","njnj");
        int i= c1.compareTo(c2);
         System.out.println(i);
         LinkedList list=new LinkedList();
