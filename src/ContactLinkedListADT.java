@@ -53,26 +53,22 @@ public class ContactLinkedListADT{
             current = current.next;
     }
 
-    public Contact SearchByName(PhoneBook list, String name ) {//done, need test
-    	if ( head != null) {
-    		Node<Contact> tmp= head;
-    		while(current.next!=null) {
-    			if (tmp.data.getName().equals(name))
-    				return tmp.data;
-    			tmp=tmp.next;
-    		}
+    public Contact SearchByName( String name ) {  //done and tested
+    	Node<Contact> tmp= head;
+    	while(tmp!=null) {
+    		if (tmp.data.getName().equals(name))
+    			return tmp.data;
+    		tmp=tmp.next;
     	}
     	return null;
     }
 
-    public Contact SearchByPhoneNumber(PhoneBook list, String PhoneNumber ){//not done yet
-    	if ( head != null) {
-    		Node<Contact> tmp= head;
-    		while(current.next!=null) {
-    			if (tmp.data.getName().equals(PhoneNumber))
-    				return tmp.data;
-    			tmp=tmp.next;
-    		}
+    public Contact SearchByPhoneNumber( String PhoneNumber ){  //done and tested
+    	Node<Contact> tmp= head;
+    	while(tmp!=null) {
+    		if (tmp.data.getPhone_Number().equals(PhoneNumber))
+    			return tmp.data;
+    		tmp=tmp.next;
     	}
     	return null;
     }
