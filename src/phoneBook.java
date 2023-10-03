@@ -9,4 +9,8 @@ public class PhoneBook {
 		
 	}
 
+	public void PrintEventDetails (){//not done yet event need to be implemented first
+
+	}
+
 }
