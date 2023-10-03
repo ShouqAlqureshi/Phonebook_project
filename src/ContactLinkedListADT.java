@@ -26,8 +26,7 @@ public class ContactLinkedListADT{
             }
 
             sort(this);//needs analyzing sort algo
-            sort(this);
-            sort(this);
+
             System.out.println(contactToInsert.toString()+"\n##has been added to the phonebook successfully ;)");
             return;
         }
@@ -87,15 +86,15 @@ public class ContactLinkedListADT{
         return current.next != null;
     }
 
-    public void sort(ContactLinkedListADT list) {//not done yet
+   /* public void sort(ContactLinkedListADT list) {//not done yet
         Contact temp;
         if ( list.head.next == null){
             System.out.println("**only one element in list**");//for testing
             return;
         }else{
             this.current=this.head;
-            while(list.hasNext()){
-                if (list.current.data.compareTo(list.current.next.data) == 1){//shifting
+            while(list.hasNext()){//for
+                if (list.current.data.compareTo(list.current.next.data) == 1){//shifting current > next
                     temp=list.current.data;
                     list.current.data= list.current.next.data;
                     list.current.next.data=temp;
@@ -105,7 +104,53 @@ public class ContactLinkedListADT{
             }
 
         }
+    }*/
+
+    public void sort(ContactLinkedListADT list) {//not done yet
+        ContactLinkedListADT sortedList= new ContactLinkedListADT();
+        sortedList.current= sortedList.head;
+        Node<Contact> temp;
+        list.current=list.head;
+        while(list.current != null){//for
+            temp = list.current.next;
+            insertToSortedList(list.current,sortedList);
+            list.current = temp;
+        }
+        list=sortedList;
+//        list.current=sortedList.current;//this=sortedlist
+
     }
+    public void insertToSortedList(Node<Contact> unsortedElement,ContactLinkedListADT sortedList ){
+        Node<Contact> temp;
+        if (sortedList.current == null || sortedList.current.data.compareTo(unsortedElement.data) == 1 || sortedList.current.data.compareTo(unsortedElement.data) == 0)//sortedList.current.data >= unsortedElement.data
+        {
+            if (sortedList.head == null) {
+                unsortedElement.next = sortedList.current;// bigger will be added before current of sorted list (changing the link)
+                sortedList.head = unsortedElement;
+                sortedList.current = sortedList.head;
+            } else if (sortedList.head != null)  {//assigning prob in pre
+//                temp= sortedList.head;
+//                while(temp.next != current){
+//                    if (temp.next == null)
+//                        break;
+//                    temp=temp.next;
+//                }
+                unsortedElement.next = sortedList.current;// bigger will be added before current of sorted list (changing the link)
+                sortedList.current = unsortedElement;//(adding to the sortedlist)
+//                temp.next=unsortedElement;
+            }
+        } else {
+            Node<Contact> tempCurrent = sortedList.current;//عشان ما احوس اللست القديمه
+            while (tempCurrent.next != null && tempCurrent.next.data.compareTo(unsortedElement.data) == -1 )// current.next.data < unsortedElement.data
+            {
+                tempCurrent = tempCurrent.next;
+            }
+            unsortedElement.next = tempCurrent.next;//=null
+            sortedList.current.next = unsortedElement;//add as last element
+            sortedList.current=unsortedElement;//move current to last element
+        }
+    }
+
     public boolean isUniqueContact(Contact contact){//current position after method: current will be the last element+tested
         if (this.head==null){
             return true;
@@ -134,19 +179,25 @@ public class ContactLinkedListADT{
     }
 
     public static void main(String[] args) {//testing area
-        Contact c1 = new Contact("Ahmad Al -Saud", "05937636532", "jnjnjnj", "nnk222", "299","299");
-        Contact c2 = new Contact(" Ahmad Alzaid", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-//        Contact c3 = new Contact("b2", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-//        Contact c4 = new Contact("b1", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-//        Contact c5 = new Contact("b6", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-//        Contact c6 = new Contact("b4", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-//        Contact c7 = new Contact("b3", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c1 = new Contact("Ahmad AlSaud", "05937636532", "jnjnjnj", "nnk222", "299","299");
+        Contact c2 = new Contact("Ahmad Alzaid", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c3 = new Contact("b2", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c4 = new Contact("b1", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c5 = new Contact("b6", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c6 = new Contact("b4", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c7 = new Contact("b3", "7968867456", "njnjnj", "mmkmkm", "klll","299");
 
         ContactLinkedListADT cll=new ContactLinkedListADT();
         cll.add(c1);//added successfully
         cll.add(c2);// exist not added /first element checked
-      // uniqueness checks each letter it will accept b11 with b1
+        cll.add(c3);
+        cll.add(c4);
+        cll.add(c5);
+        cll.add(c6);
+        cll.add(c7);
         cll.printAll();
+        // uniqueness checks each letter it will accept b11 with b1
+
     }
 
     }//class
