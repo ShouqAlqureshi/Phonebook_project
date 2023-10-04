@@ -12,7 +12,7 @@ public class PhoneBook {
 	public void PrintEventDetails (){//not done yet event need to be implemented first
 
 	}
-
+/*
 	//printing all contacts that share an event
 	public void printContact_event(Event e) { //need to be tested after implementing method schedule events
 		Node current = ELL.head ;
@@ -26,7 +26,7 @@ public class PhoneBook {
 									System.out.println(current.toString());
 			current=current.next;
 		}
-	}
+	}*/
 
 	//printing all contacts that share the first name
 	public void printContact_name( ContactLinkedListADT li, String name) { 
@@ -44,5 +44,7 @@ public class PhoneBook {
 			current=current.next;
 		}
 	}
+	public void API() {//CLI for the application
+	}
 
-}
+}//class

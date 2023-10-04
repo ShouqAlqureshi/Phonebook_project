@@ -1,6 +1,7 @@
 public class ContactLinkedListADT{
     Node<Contact> head;
     Node<Contact> current;
+
     public ContactLinkedListADT() {
         this.head = null;
         this.current = null;
@@ -77,74 +78,6 @@ public class ContactLinkedListADT{
         return current.next != null;
     }
 
-   /* public void sort(ContactLinkedListADT list) {//not done yet  didn't work
-        Contact temp;
-        if ( list.head.next == null){
-            System.out.println("**only one element in list**");//for testing
-            return;
-        }else{
-            this.current=this.head;
-            while(list.hasNext()){//for
-                if (list.current.data.compareTo(list.current.next.data) == 1){//shifting current > next
-                    temp=list.current.data;
-                    list.current.data= list.current.next.data;
-                    list.current.next.data=temp;
-                }
-
-                list.current = list.current.next;
-            }
-
-        }
-    }
-
-    public void sort(ContactLinkedListADT list) {//not done yet didn't work
-        ContactLinkedListADT sortedList= new ContactLinkedListADT();
-        sortedList.current= sortedList.head;
-        Node<Contact> temp;
-        list.current=list.head;
-        while(list.current != null){//for
-            temp = list.current.next;
-            insertToSortedList(list.current,sortedList);
-            list.current = temp;
-        }
-        this.head=sortedList.head;
-        this.current=sortedList.current;
-
-    }
-    public void insertToSortedList(Node<Contact> unsortedElement,ContactLinkedListADT sortedList ){
-        Node<Contact> temp;
-        if (sortedList.current == null || sortedList.current.data.compareTo(unsortedElement.data) == 1 || sortedList.current.data.compareTo(unsortedElement.data) == 0)//sortedList.current.data >= unsortedElement.data
-        {
-            if (sortedList.head == null) {
-                unsortedElement.next = sortedList.current;// bigger will be added before current of sorted list (changing the link)
-                sortedList.head = unsortedElement;
-                sortedList.current = sortedList.head;
-            } else if (sortedList.head != null)  {//assigning prob in pre
-                temp= sortedList.head;
-                while(temp.next != sortedList.current){
-                    if (temp.next == null)
-                        break;
-                    temp=temp.next;
-                }
-                unsortedElement.next = sortedList.current;// bigger will be added before current of sorted list (changing the link)
-                sortedList.current = unsortedElement;//(adding to the sortedlist)
-                temp.next=unsortedElement;
-            }
-        } else {
-            Node<Contact> tempCurrent = sortedList.current;//عشان ما احوس اللست القديمه
-            while (tempCurrent.next != null && tempCurrent.next.data.compareTo(unsortedElement.data) == -1 )// current.next.data < unsortedElement.data
-            {
-                tempCurrent = tempCurrent.next;
-            }
-            unsortedElement.next = tempCurrent.next;//=null
-            sortedList.current.next = unsortedElement;//add as last element
-            sortedList.current=unsortedElement;//move current to last element
-        }
-        this.head=sortedList.head;
-        this.current=sortedList.current;
-    }
-*/
-
     public void insertToSortedList(Node<Contact> unsortedElement){//last case where 2 is output
         if (head == null || head.data.compareTo(unsortedElement.data) == 1 || head.data.compareTo(unsortedElement.data) == 0) {//head.data >= unsortedElement.data
             unsortedElement.next = head;
@@ -155,14 +88,12 @@ public class ContactLinkedListADT{
             current = head;
             while (current.next != null && current.next.data.compareTo(unsortedElement.data) == -1 ){//current.next.data < unsortedElement.data
                 current = current.next;//to check sorting
-            }//trick to assign after looping
+            }//the trick is to assign after looping
             unsortedElement.next = current.next;
             current.next = unsortedElement;
             current = current.next;
         }
     }
-
-
 
     public boolean isUniqueContact(Contact contact){//current position after method: current will be the last element+tested
         if (this.head==null){
