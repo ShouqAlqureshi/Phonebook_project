@@ -65,9 +65,43 @@ public class ContactLinkedListADT{
     }
 
     public void SearchByEmailAddress(String EmailAddress ){//not done yet
+        if (head != null)
+        {
+           Node<Contact> tmp= head; 
+            while (tmp.next != null)
+                {
+                    if (tmp.data.getEmail().equalsIgnoreCase(EmailAddress))
+                    {
+                        System.out.print(tmp.retrieve())
+                    }
+                    tmp = tmp.next;
+                }
+            if (tmp.data.getEmail().equalsIgnoreCase(EmailAddress))
+                    {
+                        System.out.print(tmp.retrieve())
+                    }
+        }
+        
     }
 
     public void SearchByAddress(String Address ) {//not done yet
+         if (head != null)
+        {
+           Node<Contact> tmp= head; 
+            while (tmp.next != null)
+                {
+                    if (tmp.data.getAddress().equalsIgnoreCase(Address))
+                    {
+                        System.out.print(tmp.retrieve())
+                    }
+                    tmp = tmp.next;
+                }
+            if (tmp.data.getAddress().equalsIgnoreCase(Address))
+                    {
+                        System.out.print(tmp.retrieve())
+                    }
+        }
+        
     }
 
     public Contact getElement(){
