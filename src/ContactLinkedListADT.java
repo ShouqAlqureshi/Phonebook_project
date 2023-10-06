@@ -70,13 +70,13 @@ public class ContactLinkedListADT{
            Node<Contact> tmp= head; 
             while (tmp.next != null)
                 {
-                    if (tmp.data.getEmail().equalsIgnoreCase(EmailAddress))
+                    if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
                     {
                         System.out.print(tmp.retrieve())
                     }
                     tmp = tmp.next;
                 }
-            if (tmp.data.getEmail().equalsIgnoreCase(EmailAddress))
+            if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
                     {
                         System.out.print(tmp.retrieve())
                     }
@@ -104,6 +104,26 @@ public class ContactLinkedListADT{
         
     }
 
+    public void SearchByBirthday(String Birthday ) {//not done yet
+         if (head != null)
+        {
+           Node<Contact> tmp= head; 
+            while (tmp.next != null)
+                {
+                    if (tmp.data.getBirthday().equalsIgnoreCase(Birthday))
+                    {
+                        System.out.print(tmp.retrieve())
+                    }
+                    tmp = tmp.next;
+                }
+            if (tmp.data.getBirthday().equalsIgnoreCase(Birthday))
+                    {
+                        System.out.print(tmp.retrieve())
+                    }
+        }
+        
+    }
+    
     public Contact getElement(){
         return current.data;
     }
