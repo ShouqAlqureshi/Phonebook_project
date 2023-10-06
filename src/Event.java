@@ -1,12 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author Leen
- */
 import java.util.*;
 
 public class Event /*implements Comparable<Event> */ {
@@ -15,7 +6,7 @@ public class Event /*implements Comparable<Event> */ {
     String date;
     String time;
     String location;
-    String contact ;
+    Contact contact ;
  
 
     public Event() {
@@ -23,7 +14,7 @@ public class Event /*implements Comparable<Event> */ {
         this.date = null;
         this.time = "";
         this.location = "";
-        this.contact = "";
+        this.contact = new Contact;
     }
    
     public Event(String title, String date, String time, String location, String contact) {
@@ -77,7 +68,7 @@ public class Event /*implements Comparable<Event> */ {
 
     @Override
     public String toString() {
-        return "Event{" + "title=" + title + ", date=" + date + ", time=" + time + ", location=" + location + ", contact=" + contact + '}';
+        return "Event{" + "title=" + title + ", date=" + date + ", time=" + time + ", location=" + location /* + ", contact=" + contact + */ '}';
     }
    
    
