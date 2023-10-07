@@ -26,7 +26,6 @@ public class ContactLinkedListADT {
         System.out.println(contactToInsert.toString() + "\n is already added to the phonebook :) ");
     }
 
-
     public void Delete(Contact contactToRemove) {//remove at current which is item// done & tested
         current = findNode(contactToRemove);
         if (current == null) {
@@ -63,23 +62,15 @@ public class ContactLinkedListADT {
         }
         return current;
     }
-
-
-
-    public Contact SearchByName(String name) {  //done and tested
-        Node<Contact> tmp = head;
-        while (tmp != null) {
-//            if (tmp.data.getPhone_Number().equals(PhoneNumber)){
-//            System.out.println("Contact found!");
-//            return tmp.data;
-//        }
-        tmp = tmp.next;
+    public Contact SearchByName( String name ) {  //done and tested
+      Node<Contact> tmp= head;
+      while(tmp!=null) {
+        if (tmp.data.getName().equals(name))
+          return tmp.data;
+        tmp=tmp.next;
+        }
+      return null;
     }
-        return null;
-}
-
-
-
 
 
     public Contact SearchByPhoneNumber( String PhoneNumber ){  //done and tested
@@ -204,6 +195,24 @@ public class ContactLinkedListADT {
         }
     }
 
+    public static void printContact_name( ContactLinkedListADT li, String name) {//printing all contacts that share the first name
+        Node<Contact> current = li.head;
+        String ContactName , firstName;
+        while(current != null) {
+            ContactName = ((Contact) current.data).getName();
+            String[] fullName = ContactName.split(" ");
+            firstName= fullName[0];
+
+            if(firstName.equals(name)) {
+                System.out.println("Contacts found!");
+                System.out.println( current.data.toString());
+            }
+            current=current.next;
+        }
+    }
+    public void PrintContactByFirstName(String firstname){//all related
+        printContact_name(this,firstname);
+    }//well be implemented soon
     public static void main(String[] args) {//testing area
         Contact c1 = new Contact("Ahmad AlSaud", "05937636532", "jnjnjnj", "nnk222", "299","299");
         Contact c2 = new Contact("Ahmad Alzaid", "7968867456", "njnjnj", "mmkmkm", "klll","299");
@@ -223,6 +232,7 @@ public class ContactLinkedListADT {
         cll.add(c7);
         cll.Delete(c6);
         cll.printAll();
+        cll.PrintContactByFirstName("Ahmad");
         // uniqueness checks each letter it will accept b11 with b1
 
     }
