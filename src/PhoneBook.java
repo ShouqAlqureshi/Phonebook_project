@@ -92,7 +92,7 @@ public class PhoneBook {
 							break;
 						case 5:
 							System.out.println("Enter the contact's Birthday:");
-//							System.out.println(this.ContactList.SearchByAddress(input.nextLine()).toString());// method should return contact
+//							System.out.println(this.ContactList.SearchByBirthday(input.nextLine()).toString());// method should return contact
 							break;
 					}
 					break;
