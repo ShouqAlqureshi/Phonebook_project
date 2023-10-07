@@ -76,7 +76,7 @@ public class PhoneBook {
 					switch(criteria){
 						case 1:
 							System.out.println("Enter the contact's name:");
-							System.out.println("Contact found!"+this.ContactList.SearchByName(input.nextLine()).toString()+);
+							System.out.println("Contact found!"+this.ContactList.SearchByName(input.nextLine()).toString());
 							break;
 						case 2:
 							System.out.println("Enter the contact's Phone Number:");
@@ -106,7 +106,7 @@ public class PhoneBook {
 					System.out.println("Enter event title:");
 					String Title = input.nextLine();
 					System.out.println("Enter contact name:");
-					String name = input.nextLine();
+					String ContactName = input.nextLine();
 					System.out.println("Enter event date and time ");
 					String date_time = input.nextLine();
 					System.out.println("Enter event location:");
@@ -117,17 +117,17 @@ public class PhoneBook {
 				case 5:
 					System.out.println("Enter search criteria:\n 1.contact name\n 2.Event title");
 					System.out.println("Enter your choice");
-					int criteria = input.nextInt
-					switch(criteria){
+					int criteriaToSearch = input.nextInt();
+					switch(criteriaToSearch){
 						case 1:
 							System.out.println("Enter the contact name:");
-							String name = input.nextLine();
+							String contactName = input.nextLine();
 							//Printeventdetails by contactname method
 							System.out.println("Event found!");
 							break;
 						case 2:
 							System.out.println("Enter the event title:");
-							String Title = input.nextLine();
+							String title = input.nextLine();
 							//Printeventdetails by event title method
 							System.out.println("Event found!");
 							break;
@@ -136,7 +136,7 @@ public class PhoneBook {
 				case 6:
 					System.out.println("Enter the firstname:");
 					String firstname = input.nextLine();
-					PrintContactByFirstName(firstname);
+					ContactList.PrintContactByFirstName(firstname);
 					System.out.println("Contacts found!");
 					break;
 				case 7:
