@@ -102,6 +102,7 @@ public class PhoneBook {
 					System.out.println("Contact has been deleted successfully :)");
 					break;
 				case 4:
+					Event eventToAdd = new Event();
 					System.out.println("Enter event title:");
 					String Title = input.nextLine();
 					System.out.println("Enter contact name:");
@@ -110,12 +111,36 @@ public class PhoneBook {
 					String date_time = input.nextLine();
 					System.out.println("Enter event location:");
 					String location = input.nextLine();
+					//required: seperating date and time +adding event method with contact
+					System.out.println(eventToAdd.toString()+"Event scheduled successfully!");
 					break;
 				case 5:
+					System.out.println("Enter search criteria:\n 1.contact name\n 2.Event title");
+					System.out.println("Enter your choice");
+					int criteria = input.nextInt
+					switch(criteria){
+						case 1:
+							System.out.println("Enter the contact name:");
+							String name = input.nextLine();
+							//Printeventdetails by contactname method
+							System.out.println("Event found!");
+							break;
+						case 2:
+							System.out.println("Enter the event title:");
+							String Title = input.nextLine();
+							//Printeventdetails by event title method
+							System.out.println("Event found!");
+							break;
+					}
 					break;
 				case 6:
+					System.out.println("Enter the firstname:");
+					String firstname = input.nextLine();
+					PrintContactByFirstName(firstname);
+					System.out.println("Contacts found!");
 					break;
 				case 7:
+					//Print all events alphabetically method
 					break;
 			}
 		}while (action != 8);

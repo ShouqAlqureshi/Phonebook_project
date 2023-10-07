@@ -80,7 +80,7 @@ public class Contact implements Comparable<Contact> {
     public String toString(){
         return getClass().getName()+"name: "+getName()+"\tPhone Number:"+getPhone_Number()+"\tAddress: "+getAddress()+"\nEmail_Address: "+getEmail_Address()+"\tBirthday: "+ getBirthday()+"\n note: "+note+"";
     }
-    public void PrintContactByFirstName(){}//well be implemented soon
+    public void PrintContactByFirstName(String firstname){}//well be implemented soon
 
     public static void main(String[] args) {//testing area
         Contact c1=new Contact("bb", "05937636532","jnjnjnj","nnk222","299","njnj");
