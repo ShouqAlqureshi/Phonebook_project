@@ -14,7 +14,7 @@ public class Event /*implements Comparable<Event> */ {
         this.date = null;
         this.time = "";
         this.location = "";
-        this.contact = new Contact;
+//        this.contact = new Contact();
     }
    
     public Event(String title, String date, String time, String location, String contact) {
@@ -22,7 +22,7 @@ public class Event /*implements Comparable<Event> */ {
         this.date = date;
         this.time = time;
         this.location = location;
-        this.contact = contact ;
+//        this.contact = contact ;
        
     }
 
@@ -42,9 +42,9 @@ public class Event /*implements Comparable<Event> */ {
         this.location = location;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
+//    public void setContact(String contact) {
+//        this.contact = contact;
+//    }
 
     public String getTitle() {
         return title;
@@ -63,12 +63,13 @@ public class Event /*implements Comparable<Event> */ {
     }
 
     public String getContact() {
-        return contact;
+        return contact.toString();
     }
 
     @Override
     public String toString() {
-        return "Event{" + "title=" + title + ", date=" + date + ", time=" + time + ", location=" + location /* + ", contact=" + contact + */ '}';
+//        return "Event{" + "title=" + title + ", date=" + date + ", time=" + time + ", location=" + location; /* + ", contact=" + contact + */ '}';
+    return"";
     }
    
    

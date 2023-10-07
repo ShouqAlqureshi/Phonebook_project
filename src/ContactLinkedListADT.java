@@ -1,4 +1,4 @@
-public class ContactLinkedListADT{
+public class ContactLinkedListADT {
     Node<Contact> head;
     Node<Contact> current;
 
@@ -7,36 +7,38 @@ public class ContactLinkedListADT{
         this.current = null;
     }
 
-    public void add(Contact contactToInsert){//tested &done
-        if(isUniqueContact(contactToInsert)) {
-            if(this.head == null) {
-                insertToSortedList(new Node<Contact>(contactToInsert) );
-                System.out.println(contactToInsert.toString()+"\n##has been added to the phonebook successfully ;)");
+    public void add(Contact contactToInsert) {//tested &done
+        if (isUniqueContact(contactToInsert)) {
+            if (this.head == null) {
+                insertToSortedList(new Node<Contact>(contactToInsert));
+                System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");
                 return;
-            } if (current.next==null){// current will be last element,and it's next is null (last in first out)
-                insertToSortedList(new Node<Contact>(contactToInsert) );
+            }
+            if (current.next == null) {// current will be last element,and it's next is null (last in first out)
+                insertToSortedList(new Node<Contact>(contactToInsert));
             } else if (hasNext()) {//current will be the new element ,and it will be in the middle of the list
-                insertToSortedList(new Node<Contact>(contactToInsert) );
+                insertToSortedList(new Node<Contact>(contactToInsert));
             }
 
-            System.out.println(contactToInsert.toString()+"\n##has been added to the phonebook successfully ;)");
+            System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");
             return;
         }
-        System.out.println(contactToInsert.toString()+"\n is already added to the phonebook :) ");
+        System.out.println(contactToInsert.toString() + "\n is already added to the phonebook :) ");
     }
 
 
     public void Delete(Contact contactToRemove) {//remove at current which is item// done & tested
         current = findNode(contactToRemove);
-        if (current == null){return;}
+        if (current == null) {
+            return;
+        }
         if (current == head) {
             head = head.next;
-        }
-        else {
+        } else {
             Node<Contact> temp = head;
 
-            while (temp.next.data != current.data){
-                if(temp.next == null)
+            while (temp.next.data != current.data) {
+                if (temp.next == null)
                     break;
                 temp = temp.next;
             }
@@ -49,28 +51,36 @@ public class ContactLinkedListADT{
             current = current.next;
     }
 
-    public Contact SearchByName( String name ) {  //done and tested
-    	Node<Contact> tmp= head;
-    	while(tmp!=null) {
-    		if (tmp.data.getName().equals(name))
-    			return tmp.data;
-    		tmp=tmp.next;
-    	}
-    	return null;
-    }
+    public Node<Contact> findNode(Contact dataTofind) {
+        current = head;
+        while (!current.data.getName().equals(dataTofind.getName())) {
 
-    public Node<Contact> findNode(Contact dataTofind){
-        current=head;
-        while (!current.data.getName().equals(dataTofind.getName())){
-
-            if(current.next == null){
-                System.out.println(dataTofind.toString()+"\n##does n't exist in contact list");
+            if (current.next == null) {
+                System.out.println(dataTofind.toString() + "\n##does n't exist in contact list");
                 return null;
             }
-            current=current.next;
+            current = current.next;
         }
         return current;
     }
+
+
+
+    public Contact SearchByName(String name) {  //done and tested
+        Node<Contact> tmp = head;
+        while (tmp != null) {
+//            if (tmp.data.getPhone_Number().equals(PhoneNumber)){
+//            System.out.println("Contact found!");
+//            return tmp.data;
+//        }
+        tmp = tmp.next;
+    }
+        return null;
+}
+
+
+
+
 
     public Contact SearchByPhoneNumber( String PhoneNumber ){  //done and tested
     	Node<Contact> tmp= head;
