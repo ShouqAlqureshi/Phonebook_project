@@ -44,6 +44,43 @@ public class PhoneBook {
 			current=current.next;
 		}
 	}
+
+	//printEventsAlphabetically and insertToSortedList not yet tested, need scheduleEvent to be implemented
+	//list all events available ordered alphabetically by event title
+	public void printEventsAlphabetically(EventLinkedList list) {
+		Node<Event> currentUnSorted=list.head;
+		EventLinkedList sortedList = new EventLinkedList();
+		while (currentUnSorted!=null) {
+			insertToSortedList(list , currentUnSorted.data);
+			currentUnSorted= currentUnSorted.next;
+		}
+		Node<Event> currentSorted=sortedList.head;
+		while (currentSorted!=null) {
+			System.out.println(currentSorted.data.toString());
+			currentSorted=currentSorted.next;
+		}
+	}
+	
+        public void insertToSortedList(EventLinkedList list,Event toBeSorted) {
+        	Node<Event> unsortedElement= new Node<Event>(toBeSorted);
+            if (list.head == null || ((Event) list.head.data).getTitle().compareTo(unsortedElement.data.title) == 1 || ((Event) list.head.data).getTitle().compareTo(unsortedElement.data.title) == 0) {//head.data >= unsortedElement.data
+                unsortedElement.next = list.head;
+                list.current = list.head;
+                list.head = unsortedElement;
+            }
+            else {
+            	list.current = list.head;
+                while (list.current.next != null && ((Event) list.head.data).getTitle().compareTo(unsortedElement.data.title) == -1 ){//current.next.data < unsortedElement.data
+                	list.current = list.current.next;//to check sorting
+                }//the trick is to assign after looping
+                unsortedElement.next = list.current.next;
+                list.current.next = unsortedElement;
+                list.current = list.current.next;
+            }	
+        }
+
+
+	
 	public void API() {//CLI for the application
 		int action;
 		Scanner input = new Scanner(System.in) ;
