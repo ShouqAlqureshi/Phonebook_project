@@ -103,10 +103,13 @@ public class PhoneBook {
 					break;
 				case 4:
 					System.out.println("Enter event title:");
+					String Title = input.nextLine();
 					System.out.println("Enter contact name:");
+					String name = input.nextLine();
 					System.out.println("Enter event date and time ");
+					String date_time = input.nextLine();
 					System.out.println("Enter event location:");
-
+					String location = input.nextLine();
 					break;
 				case 5:
 					break;
