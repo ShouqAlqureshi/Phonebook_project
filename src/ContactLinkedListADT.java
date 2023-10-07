@@ -25,18 +25,23 @@ public class ContactLinkedListADT{
         System.out.println(contactToInsert.toString()+"\n is already added to the phonebook :) ");
     }
 
-    public void remove (Node<Contact> contactToRemove) {//remove at current which is item//not done yet
-        current = contactToRemove;
+
+    public void Delete(Contact contactToRemove) {//remove at current which is item// done & tested
+        current = findNode(contactToRemove);
+        if (current == null){return;}
         if (current == head) {
             head = head.next;
         }
         else {
             Node<Contact> temp = head;
 
-            while (temp.next != current)
+            while (temp.next.data != current.data){
+                if(temp.next == null)
+                    break;
                 temp = temp.next;
+            }
 
-            temp.next = current.next;
+            temp.next = current.next;//current.next=null
         }
         if (current.next == null)
             current = head;
@@ -52,6 +57,19 @@ public class ContactLinkedListADT{
     		tmp=tmp.next;
     	}
     	return null;
+    }
+
+    public Node<Contact> findNode(Contact dataTofind){
+        current=head;
+        while (!current.data.getName().equals(dataTofind.getName())){
+
+            if(current.next == null){
+                System.out.println(dataTofind.toString()+"\n##does n't exist in contact list");
+                return null;
+            }
+            current=current.next;
+        }
+        return current;
     }
 
     public Contact SearchByPhoneNumber( String PhoneNumber ){  //done and tested
@@ -72,13 +90,13 @@ public class ContactLinkedListADT{
                 {
                     if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
                     {
-                        System.out.print(tmp.retrieve())
+                        System.out.print(tmp.retrieve());
                     }
                     tmp = tmp.next;
                 }
             if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
                     {
-                        System.out.print(tmp.retrieve())
+                        System.out.print(tmp.retrieve());
                     }
         }
         
@@ -92,13 +110,13 @@ public class ContactLinkedListADT{
                 {
                     if (tmp.data.getAddress().equalsIgnoreCase(Address))
                     {
-                        System.out.print(tmp.retrieve())
+                        System.out.print(tmp.retrieve());
                     }
                     tmp = tmp.next;
                 }
             if (tmp.data.getAddress().equalsIgnoreCase(Address))
                     {
-                        System.out.print(tmp.retrieve())
+                        System.out.print(tmp.retrieve());
                     }
         }
         
@@ -112,13 +130,13 @@ public class ContactLinkedListADT{
                 {
                     if (tmp.data.getBirthday().equalsIgnoreCase(Birthday))
                     {
-                        System.out.print(tmp.retrieve())
+                        System.out.print(tmp.retrieve());
                     }
                     tmp = tmp.next;
                 }
             if (tmp.data.getBirthday().equalsIgnoreCase(Birthday))
                     {
-                        System.out.print(tmp.retrieve())
+                        System.out.print(tmp.retrieve());
                     }
         }
         
@@ -193,6 +211,7 @@ public class ContactLinkedListADT{
         cll.add(c5);
         cll.add(c6);
         cll.add(c7);
+        cll.Delete(c6);
         cll.printAll();
         // uniqueness checks each letter it will accept b11 with b1
 
