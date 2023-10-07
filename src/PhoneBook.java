@@ -76,23 +76,23 @@ public class PhoneBook {
 					switch(criteria){
 						case 1:
 							System.out.println("Enter the contact's name:");
-							System.out.println(this.ContactList.SearchByName(input.nextLine()).toString());
+							System.out.println("Contact found!"+this.ContactList.SearchByName(input.nextLine()).toString()+);
 							break;
 						case 2:
 							System.out.println("Enter the contact's Phone Number:");
-							System.out.println(this.ContactList.SearchByPhoneNumber(input.nextLine()).toString());
+							System.out.println("Contact found!"+this.ContactList.SearchByPhoneNumber(input.nextLine()).toString());
 							break;
 						case 3:
 							System.out.println("Enter the contact's Email Address:");
-//							System.out.println(this.ContactList.SearchByEmailAddress(input.nextLine()).toString());// method should return contact
+//							System.out.println("Contact found!"+this.ContactList.SearchByEmailAddress(input.nextLine()).toString());// method should return contact
 							break;
 						case 4:
 							System.out.println("Enter the contact's Address:");
-//							System.out.println(this.ContactList.SearchByAddress(input.nextLine()).toString());// method should return contact
+//							System.out.println("Contact found!"+this.ContactList.SearchByAddress(input.nextLine()).toString());// method should return contact
 							break;
 						case 5:
 							System.out.println("Enter the contact's Birthday:");
-//							System.out.println(this.ContactList.SearchByBirthday(input.nextLine()).toString());// method should return contact
+//							System.out.println("Contact found!"+this.ContactList.SearchByBirthday(input.nextLine()).toString());// method should return contact
 							break;
 					}
 					break;
