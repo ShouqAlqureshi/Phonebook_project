@@ -47,20 +47,17 @@ public class PhoneBook {
 
 	//printEventsAlphabetically and insertToSortedList not yet tested, need scheduleEvent to be implemented
 	//list all events available ordered alphabetically by event title
-	public void printEventsAlphabetically(EventLinkedList list) {
-		Node<Event> currentUnSorted=list.head;
-		EventLinkedList sortedList = new EventLinkedList();
-		while (currentUnSorted!=null) {
-			insertToSortedList(list , currentUnSorted.data);
-			currentUnSorted= currentUnSorted.next;
-		}
-		Node<Event> currentSorted=sortedList.head;
-		while (currentSorted!=null) {
-			System.out.println(currentSorted.data.toString());
-			currentSorted=currentSorted.next;
-		}
-	}
-	
+      //print all events ordered alphabetically by event title
+        public void printEventsAlphabetically(EventLinkedList list) {
+
+            Node current = list.head;
+            while (current != null) {
+                System.out.println(current.data.toString());
+                current = current.next;
+            }
+        }
+
+	//insert events Alphabetically
         public void insertToSortedList(EventLinkedList list,Event toBeSorted) {
         	Node<Event> unsortedElement= new Node<Event>(toBeSorted);
             if (list.head == null || ((Event) list.head.data).getTitle().compareTo(unsortedElement.data.title) == 1 || ((Event) list.head.data).getTitle().compareTo(unsortedElement.data.title) == 0) {//head.data >= unsortedElement.data
