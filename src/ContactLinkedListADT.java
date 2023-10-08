@@ -91,13 +91,13 @@ public class ContactLinkedListADT {
                 {
                     if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
                     {
-                        System.out.print(tmp.retrieve());
+                        System.out.print(tmp.retrieve().toString());
                     }
                     tmp = tmp.next;
                 }
             if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
                     {
-                        System.out.print(tmp.retrieve());
+                        System.out.print(tmp.retrieve().toString());
                     }
         }
         
@@ -111,13 +111,13 @@ public class ContactLinkedListADT {
                 {
                     if (tmp.data.getAddress().equalsIgnoreCase(Address))
                     {
-                        System.out.print(tmp.retrieve());
+                        System.out.print(tmp.retrieve().toString());
                     }
                     tmp = tmp.next;
                 }
             if (tmp.data.getAddress().equalsIgnoreCase(Address))
                     {
-                        System.out.print(tmp.retrieve());
+                        System.out.print(tmp.retrieve().toString());
                     }
         }
         
@@ -131,13 +131,13 @@ public class ContactLinkedListADT {
                 {
                     if (tmp.data.getBirthday().equalsIgnoreCase(Birthday))
                     {
-                        System.out.print(tmp.retrieve());
+                        System.out.print(tmp.retrieve().toString());
                     }
                     tmp = tmp.next;
                 }
             if (tmp.data.getBirthday().equalsIgnoreCase(Birthday))
                     {
-                        System.out.print(tmp.retrieve());
+                        System.out.print(tmp.retrieve().toString());
                     }
         }
         
@@ -193,6 +193,10 @@ public class ContactLinkedListADT {
                 break;
             current=current.next;
         }
+    }
+
+    public Contact retrieve () {
+        return current.data;
     }
 
     public static void printContact_name( ContactLinkedListADT li, String name) {//printing all contacts that share the first name
