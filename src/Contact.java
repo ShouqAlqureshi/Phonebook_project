@@ -56,26 +56,25 @@ public class Contact implements Comparable<Contact> {
 
     @Override
     public int compareTo(Contact contact) {//tested & done
-        if (this.Name.toUpperCase().charAt(0) > contact.getName().toUpperCase().charAt(0))
-        return 1;
-        else if (this.Name.toUpperCase().charAt(0) == contact.getName().toUpperCase().charAt(0)){
-            int limit;
-            if(!this.Name.equalsIgnoreCase(contact.getName())) {
-                limit = Math.min(this.Name.length(), contact.getName().length());
-                for (int i = 1; i < limit; i++) {
-                   if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)) {
-                      return 1;//the only case I want to swap and change  so i will ignore -1
-                   } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {
-                      return -1;
+        if (this.Name.toUpperCase().charAt(0) > contact.getName().toUpperCase().charAt(0))//  1
+        return 1;// 1
+        else if (this.Name.toUpperCase().charAt(0) == contact.getName().toUpperCase().charAt(0)){// 1
+            int limit;//0
+            if(!this.Name.equalsIgnoreCase(contact.getName())) { // n
+                limit = Math.min(this.Name.length(), contact.getName().length());//n
+                for (int i = 1; i < limit; i++) {// l
+                   if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)) {// (l-1)(2n+2)
+                      return 1;//  1                                                                                              the only case I want to swap and change  so i will ignore -1
+                   } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {//(l-1)(2n+2) *
+                      return -1;// 1
                    }
                 }
-                if ( this.Name.length() != contact.getName().length())
-                    return 2;
-            } return 0;
+                if ( this.Name.length() != contact.getName().length())// 2
+                    return 2;//1
+            } return 0;//1
         }else
-            return-1;//ascii is arranged alphabetically starting with small num الترتيب تصاعدي
-    }
-
+            return-1;// 1
+    }//1+1+1+n+n+l+(l-1)(2n+2)+1+(l-1)(2n+2)+1+2+1+1+1 = 10+2[(l-1)(2n+2)]+l+2n = 5l-2n+4ln+6 >> O(ln)
     public String toString(){
         return getClass().getName()+"name: "+getName()+"\tPhone Number:"+getPhone_Number()+"\tAddress: "+getAddress()+"\nEmail_Address: "+getEmail_Address()+"\tBirthday: "+ getBirthday()+"\n note: "+note+"";
     }

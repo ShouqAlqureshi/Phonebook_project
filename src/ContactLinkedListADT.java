@@ -2,108 +2,108 @@ public class ContactLinkedListADT {
     Node<Contact> head;
     Node<Contact> current;
 
-    public ContactLinkedListADT() {
+    public ContactLinkedListADT() {// O(1)
         this.head = null;
         this.current = null;
     }
 
     public void add(Contact contactToInsert) {//tested &done
-        if (isUniqueContact(contactToInsert)) {
-            if (this.head == null) {
-                insertToSortedList(new Node<Contact>(contactToInsert));
-                System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");
-                return;
+        if (isUniqueContact(contactToInsert)) {//mln
+            if (this.head == null) {//1
+                insertToSortedList(new Node<Contact>(contactToInsert));// ln+m
+                System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");//1
+                return;//1
             }
-            if (current.next == null) {// current will be last element,and it's next is null (last in first out)
-                insertToSortedList(new Node<Contact>(contactToInsert));
-            } else if (hasNext()) {//current will be the new element ,and it will be in the middle of the list
-                insertToSortedList(new Node<Contact>(contactToInsert));
+            if (current.next == null) {// 1                     # current will be last element,and it's next is null (last in first out)
+                insertToSortedList(new Node<Contact>(contactToInsert));//ln+m
+            } else if (hasNext()) {// 1                          #current will be the new element ,and it will be in the middle of the list
+                insertToSortedList(new Node<Contact>(contactToInsert));//ln+m
             }
 
-            System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");
-            return;
+            System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");//1
+            return;//1
         }
-        System.out.println(contactToInsert.toString() + "\n is already added to the phonebook :) ");
-    }
+        System.out.println(contactToInsert.toString() + "\n is already added to the phonebook :) ");//1
+    }//8+mln+3[ln+m]= 8+mln+3ln+3m >> O(mln)
 
     public void Delete(Contact contactToRemove) {//remove at current which is item// done & tested
-        current = findNode(contactToRemove);
-        if (current == null) {
-            return;
+        current = findNode(contactToRemove);// n+m
+        if (current == null) {//1
+            return;//1
         }
-        if (current == head) {
-            head = head.next;
+        if (current == head) {//1
+            head = head.next;//1
         } else {
-            Node<Contact> temp = head;
+            Node<Contact> temp = head;//1
 
-            while (temp.next.data != current.data) {
-                if (temp.next == null)
-                    break;
-                temp = temp.next;
+            while (temp.next.data != current.data) {//m+1
+                if (temp.next == null)//m
+                    break;//1
+                temp = temp.next;//m
             }
 
-            temp.next = current.next;//current.next=null
+            temp.next = current.next;//1             #current.next=null
         }
-        if (current.next == null)
-            current = head;
+        if (current.next == null)//1
+            current = head;//1
         else
-            current = current.next;
-    }
+            current = current.next;//1
+    }//11+n+m+m+m+m = 11+4m+n >> O(n+m)
 
     public Node<Contact> findNode(Contact dataTofind) {
-        current = head;
-        while (!current.data.getName().equals(dataTofind.getName())) {
+        current = head;//1
+        while (!current.data.getName().equals(dataTofind.getName())) {// m+1+n  *   n= char
 
-            if (current.next == null) {
-                System.out.println(dataTofind.toString() + "\n##does n't exist in contact list");
-                return null;
+            if (current.next == null) {//m
+                System.out.println(dataTofind.toString() + "\n##does n't exist in contact list");//1
+                return null;//1
             }
-            current = current.next;
+            current = current.next;//m
         }
-        return current;
-    }
+        return current;//1
+    }//5+m+n+m+m = 5+3m+n >> O(n+m)
     public Contact SearchByName( String name ) {  //done and tested
-      Node<Contact> tmp= head;
-      while(tmp!=null) {
-        if (tmp.data.getName().equals(name))
-          return tmp.data;
-        tmp=tmp.next;
+      Node<Contact> tmp= head;//1
+      while(tmp!=null) {// m+1
+        if (tmp.data.getName().equals(name))//m
+          return tmp.data;//1
+        tmp=tmp.next;//m
         }
-      return null;
-    }
+      return null;//1
+    }//4+3m >> O(m)
 
 
     public Contact SearchByPhoneNumber( String PhoneNumber ){  //done and tested
-    	Node<Contact> tmp= head;
-    	while(tmp!=null) {
-    		if (tmp.data.getPhone_Number().equals(PhoneNumber))
-    			return tmp.data;
-    		tmp=tmp.next;
+    	Node<Contact> tmp= head;//1
+    	while(tmp!=null) {//m+1
+    		if (tmp.data.getPhone_Number().equals(PhoneNumber))//m+1+n *
+    			return tmp.data;//1
+    		tmp=tmp.next;//m
     	}
-    	return null;
-    }
+    	return null;//1
+    }//5+3m+n >> O(m+n)
 
-    public void SearchByEmailAddress(String EmailAddress ){//not done yet
-        if (head != null)
+    public void SearchByEmailAddress(String EmailAddress ){// done
+        if (head != null)//1
         {
-           Node<Contact> tmp= head; 
-            while (tmp.next != null)
+           Node<Contact> tmp= head; //1
+            while (tmp.next != null)//m+1-1 *
                 {
-                    if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
+                    if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//mn-n
                     {
-                        System.out.print(tmp.retrieve().toString());
+                        System.out.print(tmp.retrieve().toString());//m-1
                     }
-                    tmp = tmp.next;
+                    tmp = tmp.next;//m-1
                 }
-            if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
+            if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//n
                     {
-                        System.out.print(tmp.retrieve().toString());
+                        System.out.print(tmp.retrieve().toString());//1
                     }
         }
         
-    }
+    }//3-2+mn-n+m+m+m+n= 1+3m+mn >> O(mn)
 
-    public void SearchByAddress(String Address ) {//not done yet
+    public void SearchByAddress(String Address ) {// done
          if (head != null)
         {
            Node<Contact> tmp= head; 
@@ -123,7 +123,7 @@ public class ContactLinkedListADT {
         
     }
 
-    public void SearchByBirthday(String Birthday ) {//not done yet
+    public void SearchByBirthday(String Birthday ) {// done
          if (head != null)
         {
            Node<Contact> tmp= head; 
@@ -147,43 +147,43 @@ public class ContactLinkedListADT {
         return current.data;
     }
 
-    public boolean hasNext() {
+    public boolean hasNext() {//1
         return current.next != null;
     }
 
     public void insertToSortedList(Node<Contact> unsortedElement){//last case where 2 is output
-        if (head == null || head.data.compareTo(unsortedElement.data) == 1 || head.data.compareTo(unsortedElement.data) == 0) {//head.data >= unsortedElement.data
-            unsortedElement.next = head;
-            current = head;
-            head = unsortedElement;
+        if (head == null || head.data.compareTo(unsortedElement.data) == 1 || head.data.compareTo(unsortedElement.data) == 0) {// 2ln *              #head.data >= unsortedElement.data
+            unsortedElement.next = head;// 1
+            current = head;// 1
+            head = unsortedElement;//1
         }
         else {
-            current = head;
-            while (current.next != null && current.next.data.compareTo(unsortedElement.data) == -1 ){//current.next.data < unsortedElement.data
-                current = current.next;//to check sorting
+            current = head; //1
+            while (current.next != null && current.next.data.compareTo(unsortedElement.data) == -1 ){// m+ln+1                #current.next.data < unsortedElement.data
+                current = current.next;//m+ln *
             }//the trick is to assign after looping
-            unsortedElement.next = current.next;
-            current.next = unsortedElement;
-            current = current.next;
+            unsortedElement.next = current.next;//1
+            current.next = unsortedElement;//1
+            current = current.next;//1
         }
-    }
+    }// 1+1+1+1+1+1+1+1+2ln+m+ln+m+ln= 8+4ln+2m >> O(ln+m) *
 
     public boolean isUniqueContact(Contact contact){//current position after method: current will be the last element+tested
-        if (this.head==null){
-            return true;
+        if (this.head==null){// 1
+            return true;// 1
         }
-        this.current=this.head;
-        while (current != null) {//first element is checked
+        this.current = this.head;//1
+        while (current != null) {// m+1 *
 
-            if (contact.compareTo(this.current.data)==0){
-                return false;
+            if (contact.compareTo(this.current.data) == 0){// m(ln) *
+                return false;//1
             }
-            if(current.next==null)
-                break;
-            current=current.next;
+            if(current.next == null) //m
+                break;// 1
+            current = current.next;//m
         }
-        return true;
-    }
+        return true;// 1
+    }// 1+1+1+1+1+1+m+1+m(ln)+2m = 7+ 3m + mln >>O(mln) m= nodes n= string characters
     public void printAll(){
         this.current=this.head;
         while (current != null) {//first element is checked
