@@ -54,9 +54,6 @@ public class PhoneBook {
     	}
     	return false;
     }
-		
-	
-
 
 	//printing all contacts that share an event
 	public void printContactShareEvent(Event e) { //need to be tested after implementing method schedule events
