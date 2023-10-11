@@ -57,16 +57,16 @@ public class Contact implements Comparable<Contact> {
 
     @Override
     public int compareTo(Contact contact) {//tested & done
-        if (this.Name.toUpperCase().charAt(0) > contact.getName().toUpperCase().charAt(0))//  1
+        if (this.Name.toUpperCase().charAt(0) > contact.getName().toUpperCase().charAt(0))//  1(2n+2)
         return 1;// 1
-        else if (this.Name.toUpperCase().charAt(0) == contact.getName().toUpperCase().charAt(0)){// 1
+        else if (this.Name.toUpperCase().charAt(0) == contact.getName().toUpperCase().charAt(0)){// 1(2n+2)
             int limit;//0
             if(!this.Name.equalsIgnoreCase(contact.getName())) { // n
                 limit = Math.min(this.Name.length(), contact.getName().length());//n
-                for (int i = 1; i < limit; i++) {// l
-                   if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)) {// (l-1)(2n+2)
+                for (int i = 1; i < limit; i++) {// n
+                   if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)) {// (n-1)(2n+2)
                       return 1;//  1                                                                                              the only case I want to swap and change  so i will ignore -1
-                   } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {//(l-1)(2n+2)
+                   } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {//(n-1)(2n+2)
                       return -1;// 1
                    }
                 }
@@ -75,8 +75,9 @@ public class Contact implements Comparable<Contact> {
             } return 0;//1
         }else
             return-1;// 1
-    }//1+1+1+n+n+l+(l-1)(2n+2)+1+(l-1)(2n+2)+1+2+1+1+1 = 10+2[(l-1)(2n+2)]+l+2n = 5l-2n+4ln+6 >> O(ln)
-    public String toString(){
+    }//1+1+1+n+n+l+(l-1)(2n+2)+1+(l-1)(2n+2)+1+2+1+1+1 = 10+2[(n-1)(2n+2)]+l+2n = 5l-2n+4ln+6 >> O(ln)
+    //2n+2+2n+2+1+n+n+n+2[(n-1)(2n+2)]+7= 12+3n+4n^2-4 = 8+3n+4n^2 >> O(n^2)
+    public String toString(){//O(1)
         return getClass().getName()+"name: "+getName()+"\tPhone Number:"+getPhone_Number()+"\tAddress: "+getAddress()+"\nEmail_Address: "+getEmail_Address()+"\tBirthday: "+ getBirthday()+"\n note: "+note+"";
     }
 //    public boolean checkConflict(String time, String date ){}

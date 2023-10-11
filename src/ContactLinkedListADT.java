@@ -142,10 +142,6 @@ public class ContactLinkedListADT {
         }
         
     }
-    
-    public Contact getElement(){
-        return current.data;
-    }
 
     public boolean hasNext() {//1
         return current.next != null;
@@ -183,7 +179,7 @@ public class ContactLinkedListADT {
             current = current.next;//m
         }
         return true;// 1
-    }// 1+1+1+1+1+1+m+1+m(ln)+2m = 7+ 3m + mln >>O(mln) m= nodes n= string characters
+    }// 1+1+1+1+1+1+m+1+m(ln)+2m = 7+ 3m + mln >> O(mln+m) m= nodes n= string characters *
     public void printAll(){
         this.current=this.head;//1
         while (current != null) {//m+1         first element is checked
@@ -204,8 +200,8 @@ public class ContactLinkedListADT {
         String ContactName , firstName;//0
         while(current != null) {//m+1
             ContactName = ((Contact) current.data).getName();//m
-            String[] fullName = ContactName.split(" ");//n
-            firstName = fullName[0];//1
+            String[] fullName = ContactName.split(" ");//m(n)
+            firstName = fullName[0];//m
 
             if(firstName.equals(name)) {//(m)n
                 System.out.println("Contacts found!");//m
@@ -213,7 +209,7 @@ public class ContactLinkedListADT {
             }
             current=current.next;//m
         }
-    }//3+5m+n+mn >>O(mn+n+m)*
+    }//2+6m+2mn >>O(mn+m)*
     public void PrintContactByFirstName(String firstname){//O(mn+n+m)*
         printContact_name(this,firstname);
     }//well be implemented soon

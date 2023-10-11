@@ -6,21 +6,20 @@ public class EventLinkedList<Event> {
         this.current = null; //1
         //o(1)
     }
-
         public void insertToSortedList(Event toBeSorted) {
     	Node<Event> unsortedElement= new Node<Event>(toBeSorted);
-        if (this.head == null || ((Event) this.head.data).getTitle().compareTo(unsortedElement.data.title) == 1 || ((Event) this.head.data).getTitle().compareTo(unsortedElement.data.title) == 0) {//head.data >= unsortedElement.data
+        if (this.head == null || this.head.data.compareTo(unsortedElement.data) == 1 ||  this.head.data.compareTo(unsortedElement.data) == 0) {//head.data >= unsortedElement.data
             unsortedElement.next = (Node<Event>) this.head;
             this.current = this.head;
-            this.head = (Node<T>) unsortedElement;
+            this.head = (Node<Event>) unsortedElement;
         }
         else {
         	this.current = this.head;
-            while (this.current.next != null && ((Event) this.head.data).getTitle().compareTo(unsortedElement.data.title) == -1 ){//current.next.data < unsortedElement.data
+            while (this.current.next != null &&   this.head.data.compareTo(unsortedElement.data) == -1 ){//current.next.data < unsortedElement.data
             	this.current = this.current.next;//to check sorting
             }
             unsortedElement.next = (Node<Event>) this.current.next;
-            this.current.next = (Node<T>) unsortedElement;
+            this.current.next = (Node<Event>) unsortedElement;
             this.current = this.current.next;
         }	
     }
