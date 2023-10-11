@@ -83,25 +83,25 @@ public class Event /*implements Comparable<Event> */ {
     }
 
         public int compareTo(Event event) {//tested & done
-        if (this.title.toUpperCase().charAt(0) > event.title.toUpperCase().charAt(0))
-        return 1;
-        else if (this.title.toUpperCase().charAt(0) == event.title.toUpperCase().charAt(0)){
-            int limit;
-            if(!this.title.equalsIgnoreCase(event.title)) {
-                limit = Math.min(this.title.length(), event.title.length());
-                for (int i = 1; i < limit; i++) {
-                   if (this.title.toUpperCase().charAt(i) > event.title.toUpperCase().charAt(i)) {
-                      return 1;//the only case I want to swap and change  so i will ignore -1
-                   } else if (this.title.toUpperCase().charAt(i) < event.title.toUpperCase().charAt(i)) {
-                      return -1;
+        if (this.title.toUpperCase().charAt(0) > event.title.toUpperCase().charAt(0))//1
+        return 1;//1
+        else if (this.title.toUpperCase().charAt(0) == event.title.toUpperCase().charAt(0)){//1
+            int limit;//0
+            if(!this.title.equalsIgnoreCase(event.title)) {//n
+                limit = Math.min(this.title.length(), event.title.length());//n
+                for (int i = 1; i < limit; i++) {//l-1+1
+                   if (this.title.toUpperCase().charAt(i) > event.title.toUpperCase().charAt(i)) {//l-1(2)
+                      return 1;//1                                   the only case I want to swap and change  so i will ignore -1
+                   } else if (this.title.toUpperCase().charAt(i) < event.title.toUpperCase().charAt(i)) {//l-1
+                      return -1;//1
                    }
                 }
-                if ( this.title.length() != event.title.length())
-                    return 2;
-            } return 0;
+                if ( this.title.length() != event.title.length())//1+1
+                    return 2;//1
+            } return 0;//1
         }else
-            return-1;
-    }
+            return-1;//1
+    }//10-2+2n+3l =8+2n+3l>> O (n+l)
    
    
 
