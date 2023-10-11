@@ -3,9 +3,8 @@ import java.util.LinkedList;
 public class Contact implements Comparable<Contact> {
     private String Name,Phone_Number,Email_Address,Birthday,Address;
     String note;
-    EventLinkedList <Event> eventList = new EventLinkedList<>();
-    Contact[] events=new Contact[10];//for events to add composition relation prob is that it's fixed + type of array
-
+    EventLinkedList<Event> scheduledEvents = new EventLinkedList<Event>();
+    
     public Contact(String name, String phone_Number, String email_Address, String birthday,String address, String note) {
         setName( name);
         setPhone_Number(phone_Number);
