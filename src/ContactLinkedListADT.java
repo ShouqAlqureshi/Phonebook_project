@@ -52,7 +52,7 @@ public class ContactLinkedListADT {
 
     public Node<Contact> findNode(Contact dataTofind) {
         current = head;//1
-        while (!current.data.getName().equals(dataTofind.getName())) {// m+1+n  *   n= char
+        while (!current.data.getName().equals(dataTofind.getName())) {// (mn+n) *   n= char
 
             if (current.next == null) {//m
                 System.out.println(dataTofind.toString() + "\n##does n't exist in contact list");//1
@@ -61,7 +61,7 @@ public class ContactLinkedListADT {
             current = current.next;//m
         }
         return current;//1
-    }//5+m+n+m+m = 5+3m+n >> O(n+m)
+    }//4+n+m+m+nm= 4+2m+n+mn >> O(n+mn+m)
     public Contact SearchByName( String name ) {  //done and tested
       Node<Contact> tmp= head;//1
       while(tmp!=null) {// m+1
@@ -76,18 +76,18 @@ public class ContactLinkedListADT {
     public Contact SearchByPhoneNumber( String PhoneNumber ){  //done and tested
     	Node<Contact> tmp= head;//1
     	while(tmp!=null) {//m+1
-    		if (tmp.data.getPhone_Number().equals(PhoneNumber))//m+1+n *
+    		if (tmp.data.getPhone_Number().equals(PhoneNumber))//m(n)
     			return tmp.data;//1
     		tmp=tmp.next;//m
     	}
     	return null;//1
-    }//5+3m+n >> O(m+n)
+    }//4+2m+mn >> O(mn)
 
     public void SearchByEmailAddress(String EmailAddress ){// done
         if (head != null)//1
         {
            Node<Contact> tmp= head; //1
-            while (tmp.next != null)//m+1-1 *
+            while (tmp.next != null)//m+1-1* //-1 because last node is not reached
                 {
                     if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//mn-n
                     {
@@ -101,43 +101,43 @@ public class ContactLinkedListADT {
                     }
         }
         
-    }//3-2+mn-n+m+m+m+n= 1+3m+mn >> O(mn)
+    }//3-2+mn-n+m+m+m+n= 1+3m+mn >> O(mn) *
 
     public void SearchByAddress(String Address ) {// done
-         if (head != null)
+         if (head != null)//1
         {
-           Node<Contact> tmp= head; 
-            while (tmp.next != null)
+           Node<Contact> tmp= head; //1
+            while (tmp.next != null)//m+1-1*
                 {
-                    if (tmp.data.getAddress().equalsIgnoreCase(Address))
+                    if (tmp.data.getAddress().equalsIgnoreCase(Address))//(mn-n)
                     {
-                        System.out.print(tmp.retrieve().toString());
+                        System.out.print(tmp.retrieve().toString());//(m-1)
                     }
-                    tmp = tmp.next;
+                    tmp = tmp.next;//(m-1)
                 }
-            if (tmp.data.getAddress().equalsIgnoreCase(Address))
+            if (tmp.data.getAddress().equalsIgnoreCase(Address))//n
                     {
-                        System.out.print(tmp.retrieve().toString());
+                        System.out.print(tmp.retrieve().toString());//1
                     }
         }
         
-    }
+    }//1+m+mn-n+m+m+n = 1+3m+mn >> O(mn)*
 
     public void SearchByBirthday(String Birthday ) {// done
-         if (head != null)
+         if (head != null) //1
         {
-           Node<Contact> tmp= head; 
-            while (tmp.next != null)
+           Node<Contact> tmp= head; //1
+            while (tmp.next != null) //m+1-1
                 {
-                    if (tmp.data.getBirthday().equalsIgnoreCase(Birthday))
+                    if (tmp.data.getBirthday().equalsIgnoreCase(Birthday)) //(mn-n)
                     {
-                        System.out.print(tmp.retrieve().toString());
+                        System.out.print(tmp.retrieve().toString()); //(m-1)
                     }
-                    tmp = tmp.next;
+                    tmp = tmp.next; //(m-1)
                 }
-            if (tmp.data.getBirthday().equalsIgnoreCase(Birthday))
+            if (tmp.data.getBirthday().equalsIgnoreCase(Birthday)) //n
                     {
-                        System.out.print(tmp.retrieve().toString());
+                        System.out.print(tmp.retrieve().toString()); //1
                     }
         }
         
@@ -160,7 +160,7 @@ public class ContactLinkedListADT {
         else {
             current = head; //1
             while (current.next != null && current.next.data.compareTo(unsortedElement.data) == -1 ){// m+ln+1                #current.next.data < unsortedElement.data
-                current = current.next;//m+ln *
+                current = current.next;//m+ln **
             }//the trick is to assign after looping
             unsortedElement.next = current.next;//1
             current.next = unsortedElement;//1
@@ -185,36 +185,36 @@ public class ContactLinkedListADT {
         return true;// 1
     }// 1+1+1+1+1+1+m+1+m(ln)+2m = 7+ 3m + mln >>O(mln) m= nodes n= string characters
     public void printAll(){
-        this.current=this.head;
-        while (current != null) {//first element is checked
-            System.out.println("++++++++\n"+current.data.toString()+"\n_________\n");
+        this.current=this.head;//1
+        while (current != null) {//m+1         first element is checked
+            System.out.println("++++++++\n"+current.data.toString()+"\n_________\n");//m
 
-            if(current.next==null)
-                break;
-            current=current.next;
+            if(current.next==null)//m
+                break;//1
+            current=current.next;//m
         }
-    }
+    }//3+4m >>O(m)
 
     public Contact retrieve () {
         return current.data;
-    }
+    }//O(1)
 
     public static void printContact_name( ContactLinkedListADT li, String name) {//printing all contacts that share the first name
-        Node<Contact> current = li.head;
-        String ContactName , firstName;
-        while(current != null) {
-            ContactName = ((Contact) current.data).getName();
-            String[] fullName = ContactName.split(" ");
-            firstName= fullName[0];
+        Node<Contact> current = li.head;//1
+        String ContactName , firstName;//0
+        while(current != null) {//m+1
+            ContactName = ((Contact) current.data).getName();//m
+            String[] fullName = ContactName.split(" ");//n
+            firstName = fullName[0];//1
 
-            if(firstName.equals(name)) {
-                System.out.println("Contacts found!");
-                System.out.println( current.data.toString());
+            if(firstName.equals(name)) {//(m)n
+                System.out.println("Contacts found!");//m
+                System.out.println( current.data.toString());//m
             }
-            current=current.next;
+            current=current.next;//m
         }
-    }
-    public void PrintContactByFirstName(String firstname){//all related
+    }//3+5m+n+mn >>O(mn+n+m)*
+    public void PrintContactByFirstName(String firstname){//O(mn+n+m)*
         printContact_name(this,firstname);
     }//well be implemented soon
     public static void main(String[] args) {//testing area
@@ -234,7 +234,7 @@ public class ContactLinkedListADT {
         cll.add(c5);
         cll.add(c6);
         cll.add(c7);
-        cll.Delete(c6);
+
         cll.printAll();
         cll.PrintContactByFirstName("Ahmad");
         // uniqueness checks each letter it will accept b11 with b1
