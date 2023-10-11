@@ -1,36 +1,80 @@
+
 import java.util.Scanner;
+
 
 public class PhoneBook {
 	
-	ContactLinkedListADT ContactList;
-	EventLinkedList EventList;
+	ContactLinkedListADT ContactList = new ContactLinkedListADT();
+	EventLinkedList EventList = new EventLinkedList();
+	
+	Scanner input = new Scanner(System.in);
 	
 	public void scheduleEvent() { //not done yet
 		
-	}
+		String eventDate, eventTime;
+        Contact con ;
+        System.out.print("Enter event title");
+        String ETitle = input.nextLine();
+        System.out.print("Enter contact name");
+        String CName = input.nextLine();
+        if(ContactList.SearchByName(CName)!= null){
+            con = ContactList.SearchByName(CName) ;
 
-	public void PrintEventDetails (){//not done yet event need to be implemented first
+            
+            System.out.print("Enter event date and time MM/DD/YYYY HH:MM");
+            String eventTandD= input.nextLine();
+            String[] timeAndDate = eventTandD.split(" ");
+             eventDate= timeAndDate[0];
+             eventTime= timeAndDate[1];
+            if(conflict(con ,eventTime,eventDate)){
+                System.out.println("Date and time are not available");
+                return;
+            }
+            System.out.print("Enter event location");
+                    String Elocation= input.nextLine();
+                  Event EventToBeSchedule = new Event(ETitle ,eventDate ,eventTime , Elocation , con ) ;
+                  EventList.insertToSortedList (EventToBeSchedule );
+                  con.scheduledEvents.insertToSortedList(EventToBeSchedule);
 
-	}
-/*
+            System.out.println("\nEvent scheduled successfully!");
+        }
+        else {
+        System.out.println("Contact doesn't exist");
+            return;
+            }
+}
+
+   
+    public boolean conflict(Contact c , String time , String Date){
+    	
+    	Node<Event> tmp = EventList.head;
+    	while(tmp!= null) {
+    		if(tmp.data.getDate().equals(Date) && tmp.data.getTime().equals(time))
+    			return true;
+    	}
+    	return false;
+    }
+		
+	
+
+
 	//printing all contacts that share an event
-	public void printContact_event(Event e) { //need to be tested after implementing method schedule events
-		Node current = ELL.head ;
+	public void printContactShareEvent(Event e) { //need to be tested after implementing method schedule events
+		Node current = EventList.head ;
 		while (current != null) {
 			if (  ((Event) current.data).getTitle().equals(e.getTitle())  )
 				if ( ((Event) current.data).getDate().equals(e.getDate())  )
 					if ( ((Event) current.data).getTime().equals(e.getTime()) )
 						if ( ((Event) current.data).getTime().equals(e.getTime()) )
 							if ( ((Event) current.data).getLocation().equals(e.getLocation()) )
-								if ( ((Event) current.data).getContact().equals(e.getContact()) )
-									System.out.println(current.toString());
+									System.out.println(((Event) current.data).getContact().toString());
 			current=current.next;
 		}
-	}*/
+	}
 
 	//printing all contacts that share the first name
-	public void printContact_name( ContactLinkedListADT li, String name) { 
-		Node<Contact> current=li.head;
+	public void printContactShareName( String name) { 
+		Node<Contact> current=ContactList.head;
 		String ContactName , firstName;
 		while(current!=null) {
 			ContactName= ((Contact) current.data).getName();
@@ -46,35 +90,17 @@ public class PhoneBook {
 	}
 
 	//printEventsAlphabetically and insertToSortedList not yet tested, need scheduleEvent to be implemented
-	//list all events available ordered alphabetically by event title
       //print all events ordered alphabetically by event title
-        public void printEventsAlphabetically(EventLinkedList list) {
+        public void printEventsAlphabetically() {
 
-            Node current = list.head;
+            Node current = EventList.head;
             while (current != null) {
                 System.out.println(current.data.toString());
                 current = current.next;
             }
         }
 
-	//insert events Alphabetically
-        public void insertToSortedList(EventLinkedList list,Event toBeSorted) {
-        	Node<Event> unsortedElement= new Node<Event>(toBeSorted);
-            if (list.head == null || ((Event) list.head.data).getTitle().compareTo(unsortedElement.data.title) == 1 || ((Event) list.head.data).getTitle().compareTo(unsortedElement.data.title) == 0) {//head.data >= unsortedElement.data
-                unsortedElement.next = list.head;
-                list.current = list.head;
-                list.head = unsortedElement;
-            }
-            else {
-            	list.current = list.head;
-                while (list.current.next != null && ((Event) list.head.data).getTitle().compareTo(unsortedElement.data.title) == -1 ){//current.next.data < unsortedElement.data
-                	list.current = list.current.next;//to check sorting
-                }//the trick is to assign after looping
-                unsortedElement.next = list.current.next;
-                list.current.next = unsortedElement;
-                list.current = list.current.next;
-            }	
-        }
+
 
 
 	
@@ -180,6 +206,40 @@ public class PhoneBook {
 		}while (action != 8);
 		System.exit(0);
 	}
+	
+    public static void main(String[] args) {//testing area 
+    	
+        Contact c1 = new Contact("Ahmad AlSaud", "05937636532", "jnjnjnj", "nnk222", "299","299");
+        Contact c2 = new Contact("Ahmad Alzaid", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c3 = new Contact("Ahmad", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c4 = new Contact("b2", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c5 = new Contact("b6", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c6 = new Contact("b4", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c7 = new Contact("b3", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+
+        
+        Event e1 = new Event("title", "MM/DD/YYYY" , "HH:MM", "location" , c1);
+        
+        PhoneBook testing = new PhoneBook();
+        
+        ContactLinkedListADT cll=new ContactLinkedListADT();
+        testing.ContactList.add(c1);
+        testing.scheduleEvent();
+        testing.scheduleEvent();
+        testing.printEventsAlphabetically();
+        /*
+        testing.ContactList.add(c2);
+        testing.ContactList.add(c3);
+        testing.ContactList.add(c4);
+        testing.ContactList.add(c5);
+        testing.ContactList.add(c6);
+        testing.ContactList.add(c7);
+        */
+
+        // uniqueness checks each letter it will accept b11 with b1
+
+    }
+    
 
 
 }//class
