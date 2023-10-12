@@ -1,4 +1,4 @@
-public class Event implements Comparable<Event> {
+public class Event {
     
     String title;
     String date;
@@ -76,10 +76,10 @@ public class Event implements Comparable<Event> {
 
     @Override
     public String toString() {
-        return "Event{" + "title=" + title + ", date=" + date + ", time=" + time + ", location=" + location; /* + ", contact=" + contact + */ '}';
+        return "Event{" + "title=" + title + ", date=" + date + ", time=" + time + ", location=" + location +/* + ", contact=" + contact + */ '}';
     }
 
-    public int compareTo(Event event) {//tested & done
+    public int comparing(Event event) {//tested & done
         if (this.title.toUpperCase().charAt(0) > event.title.toUpperCase().charAt(0))//2n+2
         return 1;//1
         else if (this.title.toUpperCase().charAt(0) == event.title.toUpperCase().charAt(0)){//2n+2
