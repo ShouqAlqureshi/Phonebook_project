@@ -52,36 +52,35 @@ public class PhoneBook {
 
 		
    //delete all events of specific contact from the general events linked list
-    public void deleteEvents(EventLinkedList contacteventList) {
-    	Node<Event> nodeContactEvents = contacteventList.head;
+    public void deleteEvents(EventLinkedList contactEventList) {
+    	Node<Event> nodeContactEvents = contactEventList.head;
     	Node<Event> nodeAllEvents = EventList.head;
     	
-    	while (nodeContactEvents!=null) {
+    	while (nodeContactEvents != null) {
     		while ( nodeAllEvents != null) {
     			if ( nodeContactEvents.data.title.equals(nodeAllEvents.data.title) && nodeContactEvents.data.time.equals(nodeAllEvents.data.time) && nodeContactEvents.data.date.equals(nodeAllEvents.data.date) && nodeContactEvents.data.location.equals(nodeAllEvents.data.location) ) {
     				if (nodeAllEvents == EventList.head) {
-    					EventList.head=EventList.head.next;
+    					EventList.head = EventList.head.next;
     					break;
     				}
     				else {
     					Node<Event> tmp = EventList.head;
     					while (tmp.next != nodeAllEvents)
-    						tmp=tmp.next;
-    					tmp.next=nodeAllEvents.next;
+    						tmp = tmp.next;
+    					tmp.next = nodeAllEvents.next;
     				}
-    				if (nodeAllEvents!=null) {
+    				if (nodeAllEvents != null) {
         				if (nodeAllEvents.next == null)
-        					nodeAllEvents=EventList.head;
+        					nodeAllEvents = EventList.head;
         				else
-        					nodeAllEvents=nodeAllEvents.next;
+        					nodeAllEvents = nodeAllEvents.next;
     				}
     				else
     					break;
     			}
-
-    			nodeAllEvents= nodeAllEvents.next;
+    			nodeAllEvents = nodeAllEvents.next;
     			}
-    		nodeContactEvents=nodeContactEvents.next;	
+    		nodeContactEvents = nodeContactEvents.next;
     		}
     	}
 
