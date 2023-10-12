@@ -6,9 +6,7 @@ public class Node <T>{
         this.next = null; //1
         //o(1)
     }
-
-    public String  retrieve(){
-        return ""; //1
-        //o(1)
-    }//just to solve errors
+    public T retrieve () {
+        return data;
+    }
 }

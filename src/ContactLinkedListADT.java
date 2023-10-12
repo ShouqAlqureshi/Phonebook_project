@@ -86,18 +86,18 @@ public class ContactLinkedListADT {
     public void SearchByEmailAddress(String EmailAddress ){// done
         if (head != null)//1
         {
-           Node<Contact> tmp= head; //1
-            while (tmp.next != null)//m+1-1* //-1 because last node is not reached
+           current = head; //1
+            while (current.next != null)//m+1-1* //-1 because last node is not reached
                 {
-                    if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//mn-n
+                    if (current.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//mn-n
                     {
-                        System.out.print(tmp.retrieve().toString());//m-1
+                        System.out.println(current.retrieve().toString()+"found");//m-1
                     }
-                    tmp = tmp.next;//m-1
+                    current = current.next;//m-1
                 }
-            if (tmp.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//n
+            if (current.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//n
                     {
-                        System.out.print(tmp.retrieve().toString());//1
+                        System.out.print(current.retrieve().toString());//1
                     }
         }
         
@@ -106,18 +106,18 @@ public class ContactLinkedListADT {
     public void SearchByAddress(String Address ) {// done
          if (head != null)//1
         {
-           Node<Contact> tmp= head; //1
-            while (tmp.next != null)//m+1-1*
+           current = head; //1
+            while (current.next != null)//m+1-1*
                 {
-                    if (tmp.data.getAddress().equalsIgnoreCase(Address))//(mn-n)
+                    if (current.data.getAddress().equalsIgnoreCase(Address))//(mn-n)
                     {
-                        System.out.print(tmp.retrieve().toString());//(m-1)
+                        System.out.print(current.retrieve().toString());//(m-1)
                     }
-                    tmp = tmp.next;//(m-1)
+                    current = current.next;//(m-1)
                 }
-            if (tmp.data.getAddress().equalsIgnoreCase(Address))//n
+            if (current.data.getAddress().equalsIgnoreCase(Address))//n
                     {
-                        System.out.print(tmp.retrieve().toString());//1
+                        System.out.print(current.retrieve().toString());//1
                     }
         }
         
@@ -126,18 +126,18 @@ public class ContactLinkedListADT {
     public void SearchByBirthday(String Birthday ) {// done
          if (head != null) //1
         {
-           Node<Contact> tmp= head; //1
-            while (tmp.next != null) //m+1-1
+           current = head; //1
+            while (current.next != null) //m+1-1
                 {
-                    if (tmp.data.getBirthday().equalsIgnoreCase(Birthday)) //(mn-n)
+                    if (current.data.getBirthday().equalsIgnoreCase(Birthday)) //(mn-n)
                     {
-                        System.out.print(tmp.retrieve().toString()); //(m-1)
+                        System.out.print(current.retrieve().toString()); //(m-1)
                     }
-                    tmp = tmp.next; //(m-1)
+                    current = current.next; //(m-1)
                 }
-            if (tmp.data.getBirthday().equalsIgnoreCase(Birthday)) //n
+            if (current.data.getBirthday().equalsIgnoreCase(Birthday)) //n
                     {
-                        System.out.print(tmp.retrieve().toString()); //1
+                        System.out.print(current.retrieve().toString()); //1
                     }
         }
         
@@ -191,9 +191,6 @@ public class ContactLinkedListADT {
         }
     }//3+4m >>O(m)
 
-    public Contact retrieve () {
-        return current.data;
-    }//O(1)
 
     public static void printContact_name( ContactLinkedListADT li, String name) {//printing all contacts that share the first name
         Node<Contact> current = li.head;//1
@@ -215,12 +212,12 @@ public class ContactLinkedListADT {
     }//well be implemented soon
     public static void main(String[] args) {//testing area
         Contact c1 = new Contact("Ahmad AlSaud", "05937636532", "jnjnjnj", "nnk222", "299","299");
-        Contact c2 = new Contact("Ahmad Alzaid", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-        Contact c3 = new Contact("Ahmad", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-        Contact c4 = new Contact("b2", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-        Contact c5 = new Contact("b6", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-        Contact c6 = new Contact("b4", "7968867456", "njnjnj", "mmkmkm", "klll","299");
-        Contact c7 = new Contact("b3", "7968867456", "njnjnj", "mmkmkm", "klll","299");
+        Contact c2 = new Contact("Ahmad Alzaid", "7968867456", "lnnnnn", "mmkmkm", "klll","299");
+        Contact c3 = new Contact("Ahmad", "7968867456", "laaaa", "mmkmkm", "klll","299");
+        Contact c4 = new Contact("b2", "7968867456", "zssss", "mmkmkm", "klll","299");
+        Contact c5 = new Contact("b6", "7968867456", "caaa", "mmkmkm", "klll","299");
+        Contact c6 = new Contact("b4", "7968867456", "lmmm", "mmkmkm", "klll","299");
+        Contact c7 = new Contact("b3", "7968867456", "knnnnn", "mmkmkm", "klll","299");
 
         ContactLinkedListADT cll=new ContactLinkedListADT();
         cll.add(c1);
@@ -230,9 +227,7 @@ public class ContactLinkedListADT {
         cll.add(c5);
         cll.add(c6);
         cll.add(c7);
-
-        cll.printAll();
-        cll.PrintContactByFirstName("Ahmad");
+        cll.SearchByEmailAddress("jnjnjnj");
         // uniqueness checks each letter it will accept b11 with b1
 
     }
