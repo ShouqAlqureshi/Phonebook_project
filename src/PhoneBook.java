@@ -163,15 +163,15 @@ public class PhoneBook {
 							break; //1
 						case 3:
 							System.out.println("Enter the contact's Email Address:"); //1
-//							System.out.println("Contact found!"+this.ContactList.SearchByEmailAddress(input.nextLine()).toString());// mn		 method should return contact
+							this.ContactList.SearchByEmailAddress(input.nextLine());// mn		 method should return contact
 							break;
 						case 4:
 							System.out.println("Enter the contact's Address:"); //1
-//							System.out.println("Contact found!"+this.ContactList.SearchByAddress(input.nextLine()).toString());//mn			 method should return contact
+							this.ContactList.SearchByAddress(input.nextLine());//mn			 method should return contact
 							break;
 						case 5:
 							System.out.println("Enter the contact's Birthday:"); //1
-//							System.out.println("Contact found!"+this.ContactList.SearchByBirthday(input.nextLine()).toString());//mn+m		 method should return contact
+							this.ContactList.SearchByBirthday(input.nextLine());//mn+m		 method should return contact
 							break; //1
 					}
 					break; //1

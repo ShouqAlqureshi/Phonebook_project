@@ -91,7 +91,7 @@ public class ContactLinkedListADT {
                 {
                     if (current.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//mn-n
                     {
-                        System.out.println(current.retrieve().toString()+"found");//m-1
+                        System.out.println("Contact found!"+current.retrieve().toString());//m-1
                     }
                     current = current.next;//m-1
                 }
@@ -111,7 +111,7 @@ public class ContactLinkedListADT {
                 {
                     if (current.data.getAddress().equalsIgnoreCase(Address))//(mn-n)
                     {
-                        System.out.print(current.retrieve().toString());//(m-1)
+                        System.out.print("Contact found!"+current.retrieve().toString());//(m-1)
                     }
                     current = current.next;//(m-1)
                 }
@@ -131,7 +131,7 @@ public class ContactLinkedListADT {
                 {
                     if (current.data.getBirthday().equalsIgnoreCase(Birthday)) //(mn-n)
                     {
-                        System.out.print(current.retrieve().toString()); //(m-1)
+                        System.out.print("Contact found!"+current.retrieve().toString()); //(m-1)
                     }
                     current = current.next; //(m-1)
                 }
