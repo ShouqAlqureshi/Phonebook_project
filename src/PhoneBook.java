@@ -121,7 +121,7 @@ public class PhoneBook {
         		tmpContacts=tmpContacts.next;
         	}
         }
-		
+
 	public void API() {//CLI for the application
 		int action; //0
 		Scanner input = new Scanner(System.in) ; //1
