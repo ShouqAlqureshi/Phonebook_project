@@ -65,33 +65,38 @@ public class ContactLinkedListADT {
     public Contact SearchByName( String name ) {  //done and tested
       Node<Contact> tmp= head;//1
       while(tmp!=null) {// m+1
-        if (tmp.data.getName().equals(name))//m
+        if (tmp.data.getName().equals(name)){//m
+            System.out.println("Contact found!\t"+ tmp.data.toString()); //m
           return tmp.data;//1
+        }
         tmp=tmp.next;//m
         }
-      return null;//1
+        System.out.println("could n't found contact ");
+        return null;//1
     }//4+3m >> O(m)
 
 
     public Contact SearchByPhoneNumber( String PhoneNumber ){  //done and tested
     	Node<Contact> tmp= head;//1
     	while(tmp!=null) {//m+1
-    		if (tmp.data.getPhone_Number().equals(PhoneNumber))//m(n)
-    			return tmp.data;//1
+    		if (tmp.data.getPhone_Number().equals(PhoneNumber)){//m(n)
+                System.out.println("Contact found!\t"+tmp.data.toString()); //m
+            return tmp.data;//1
+            }
     		tmp=tmp.next;//m
     	}
+        System.out.println("could n't found contact ");
     	return null;//1
     }//4+2m+mn >> O(mn)
 
     public void SearchByEmailAddress(String EmailAddress ){// done
-        if (head != null)//1
-        {
+        if (head != null){//1
            current = head; //1
             while (current.next != null)//m+1-1* //-1 because last node is not reached
                 {
                     if (current.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//mn-n
                     {
-                        System.out.println("Contact found!"+current.retrieve().toString());//m-1
+                        System.out.println("Contact found!\t"+current.retrieve().toString());//m-1
                     }
                     current = current.next;//m-1
                 }
@@ -99,8 +104,9 @@ public class ContactLinkedListADT {
                     {
                         System.out.print(current.retrieve().toString());//1
                     }
+        }else{
+        System.out.println("could n't found contact ");
         }
-        
     }//3-2+mn-n+m+m+m+n= 1+3m+mn >> O(mn) *
 
     public void SearchByAddress(String Address ) {// done
@@ -111,7 +117,7 @@ public class ContactLinkedListADT {
                 {
                     if (current.data.getAddress().equalsIgnoreCase(Address))//(mn-n)
                     {
-                        System.out.print("Contact found!"+current.retrieve().toString());//(m-1)
+                        System.out.print("Contact found!\t"+current.retrieve().toString());//(m-1)
                     }
                     current = current.next;//(m-1)
                 }
@@ -119,8 +125,9 @@ public class ContactLinkedListADT {
                     {
                         System.out.print(current.retrieve().toString());//1
                     }
-        }
-        
+        }else{
+             System.out.println("could n't found contact ");
+         }
     }//1+m+mn-n+m+m+n = 1+3m+mn >> O(mn)*
 
     public void SearchByBirthday(String Birthday ) {// done
@@ -131,7 +138,7 @@ public class ContactLinkedListADT {
                 {
                     if (current.data.getBirthday().equalsIgnoreCase(Birthday)) //(mn-n)
                     {
-                        System.out.print("Contact found!"+current.retrieve().toString()); //(m-1)
+                        System.out.print("Contact found!\t"+current.retrieve().toString()); //(m-1)
                     }
                     current = current.next; //(m-1)
                 }
@@ -139,8 +146,9 @@ public class ContactLinkedListADT {
                     {
                         System.out.print(current.retrieve().toString()); //1
                     }
-        }
-        
+        }else{
+             System.out.println("could n't found contact ");
+         }
     }
 
     public boolean hasNext() {//1
