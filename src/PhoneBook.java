@@ -54,6 +54,38 @@ public class PhoneBook {
     	}
     	return false; //1
     }//4 + m+mn >> o(mn+m)
+
+		
+    //delete all events of specific contact from the general events linked list
+    public void deleteEvents(EventLinkedList contacteventList) {
+    	Node<Event> ContactEvents = contacteventList.head;
+    	Node<Event> nodeAllEvents = EventList.head;
+    	
+    	while (ContactEvents!=null) {
+    		while ( nodeAllEvents != null) {
+    			if ( ContactEvents.data.title.equals(nodeAllEvents.data.title) && ContactEvents.data.time.equals(nodeAllEvents.data.time) && ContactEvents.data.date.equals(nodeAllEvents.data.date) && ContactEvents.data.location.equals(nodeAllEvents.data.location) ) {
+    				if (nodeAllEvents == EventList.head) 
+    					EventList.head= EventList.head.next;
+    	            Node<Event> temp = EventList.head;//1
+    	            
+    	            while ( !temp.next.data.getTitle().equals(nodeAllEvents.data.getTitle()) ) {//m+1
+    	                if (temp.next == null)//m
+    	                    break;//1
+    	                temp = temp.next;//m
+    	            }
+
+    	            temp.next = nodeAllEvents.next;//1             #current.next=null
+        	        if (nodeAllEvents.next == null)//1
+        	        	nodeAllEvents = EventList.head;//1
+        	        else
+        	        	nodeAllEvents = nodeAllEvents.next;
+    	        }
+    			nodeAllEvents= nodeAllEvents.next;
+    			}
+    		ContactEvents=ContactEvents.next;	
+    		}
+    	}
+    
 		
 	
 
