@@ -11,63 +11,96 @@ public class PhoneBook {
 	
 	public void scheduleEvent() { //not done yet
 		
-		String eventDate, eventTime;
-        Contact con ;
-        System.out.print("Enter event title");
-        String ETitle = input.nextLine();
-        System.out.print("Enter contact name");
-        String CName = input.nextLine();
-        if(ContactList.SearchByName(CName)!= null){
-            con = ContactList.SearchByName(CName) ;
+		String eventDate, eventTime; //0
+        Contact con ; //0
+        System.out.print("Enter event title"); //1
+        String ETitle = input.nextLine(); //1
+        System.out.print("Enter contact name"); //1
+        String CName = input.nextLine(); //1
+        if(ContactList.SearchByName(CName)!= null){ //m
+            con = ContactList.SearchByName(CName) ; //m
 
             
-            System.out.print("Enter event date and time MM/DD/YYYY HH:MM");
-            String eventTandD= input.nextLine();
-            String[] timeAndDate = eventTandD.split(" ");
-             eventDate= timeAndDate[0];
-             eventTime= timeAndDate[1];
-            if(conflict(con ,eventTime,eventDate)){
-                System.out.println("Date and time are not available");
-                return;
+            System.out.print("Enter event date and time MM/DD/YYYY HH:MM"); //1
+            String eventTandD= input.nextLine(); //1
+            String[] timeAndDate = eventTandD.split(" "); //n
+             eventDate= timeAndDate[0]; //1
+             eventTime= timeAndDate[1]; //1
+            if(conflict(con ,eventTime,eventDate)){ //mn+m
+                System.out.println("Date and time are not available"); //1
+                return; //1
             }
-            System.out.print("Enter event location");
-                    String Elocation= input.nextLine();
-                  Event EventToBeSchedule = new Event(ETitle ,eventDate ,eventTime , Elocation , con ) ;
-                  EventList.insertToSortedList (EventToBeSchedule );
-                  con.scheduledEvents.insertToSortedList(EventToBeSchedule);
+            System.out.print("Enter event location"); //1
+                  String Elocation= input.nextLine(); //1
+                  Event EventToBeSchedule = new Event(ETitle ,eventDate ,eventTime , Elocation , con ) ; //1
+                  EventList.insertToSortedList (EventToBeSchedule ); //n^2+m
+                  con.scheduledEvents.insertToSortedList(EventToBeSchedule); //n^2+m
 
-            System.out.println("\nEvent scheduled successfully!");
+            System.out.println("\nEvent scheduled successfully!"); //1
         }
         else {
-        System.out.println("Contact doesn't exist");
-            return;
-            }
+        System.out.println("Contact doesn't exist"); //1
+            return; //1
+            }//16+5m+n+2n^2+mn >> o(m+n^2+mn)
 }
 
    
     public boolean conflict(Contact c , String time , String Date){
     	
-    	Node<Event> tmp = EventList.head;
-    	while(tmp!= null) {
-    		if(tmp.data.getDate().equals(Date) && tmp.data.getTime().equals(time))
-    			return true;
+    	Node<Event> tmp = EventList.head; //1
+    	while(tmp!= null) { //m+1
+    		if(tmp.data.getDate().equals(Date) && tmp.data.getTime().equals(time)) //m(n)
+    			return true; //1
     	}
-    	return false;
-    }
+    	return false; //1
+    }//4 + m+mn >> o(mn+m)
+		
+	
+
 
 	//printing all contacts that share an event
 	public void printContactShareEvent(Event e) { //need to be tested after implementing method schedule events
-		Node current = EventList.head ;
-		while (current != null) {
-			if (  ((Event) current.data).getTitle().equals(e.getTitle())  )
-				if ( ((Event) current.data).getDate().equals(e.getDate())  )
-					if ( ((Event) current.data).getTime().equals(e.getTime()) )
-						if ( ((Event) current.data).getTime().equals(e.getTime()) )
-							if ( ((Event) current.data).getLocation().equals(e.getLocation()) )
-									System.out.println(((Event) current.data).getContact().toString());
-			current=current.next;
+		Node current = EventList.head ; //1
+		while (current != null) { //m+1
+			if (  ((Event) current.data).getTitle().equals(e.getTitle())  ) //m(n)
+				if ( ((Event) current.data).getDate().equals(e.getDate())  ) //m(n)
+					if ( ((Event) current.data).getTime().equals(e.getTime()) ) //m(n)
+						if ( ((Event) current.data).getLocation().equals(e.getLocation()) ) //m(n)
+								System.out.println(((Event) current.data).getContact().toString()); //m
+			current=current.next; //m
 		}
-	}
+	} // 2+3m+4mn >> o(mn+m)
+	
+	
+
+	//printing all contacts that share the first name
+	public void printContactShareName( String name) { 
+		Node<Contact> current=ContactList.head; //1
+		String ContactName , firstName; //0
+		while(current!=null) { //m+1
+			ContactName= ((Contact) current.data).getName(); //m
+			String[] fullName= ContactName.split(" "); //mn
+			firstName= fullName[0]; //m
+
+			if(firstName.equals(name)) { //mn
+				System.out.println("Contacts found!"); //m
+				System.out.println( current.data.toString()); //m
+			}
+			current=current.next;//m
+		}
+	}//2+6m+2mn >> o(mn+m)
+	
+	
+
+	//printEventsAlphabetically and insertToSortedList not yet tested, need scheduleEvent to be implemented
+      //print all events ordered alphabetically by event title
+        public void printEventsAlphabetically() {
+            Node current = EventList.head; //1
+            while (current != null) { //m+1
+                System.out.println(current.data.toString()); //m
+                current = current.next; //m
+            }
+        }//3m+2 >> o(m)
 
 	//printing all contacts that share the first name
 	public void printContactShareName( String name) { 
@@ -100,109 +133,137 @@ public class PhoneBook {
 
 
 
+        
+        public void printEventByContactName(String contactName) {
+        	Contact contactToFind = ContactList.SearchByName(contactName); //m
+        	Node<Event> temp = contactToFind.scheduledEvents.head; //1
+        	while (temp!=null) { //m+1
+        		System.out.println(temp.data.toString());//m
+        		temp=temp.next;//m
+        	}
+        }//4m+2 >> o(m)
+        
+        
+        
+        public void printcontactSharingE_title(String EventTitle) {
+        	Node<Contact> tmpContacts = ContactList.head; //1
+        	while (tmpContacts!=null) { //m+1
+        		Node<Event> tmpEvents = tmpContacts.data.scheduledEvents.head; //m
+        		while(tmpEvents!=null) {
+        			if (tmpEvents.data.title.equalsIgnoreCase(EventTitle))
+        				System.out.println(tmpContacts.data.toString());
+        			tmpEvents=tmpEvents.next;
+        		}
+        		tmpContacts=tmpContacts.next;
+        	}
+        }
+        
+        
+
+
 	
 	public void API() {//CLI for the application
-		int action;
-		Scanner input = new Scanner(System.in) ;
-		System.out.println("Welcome to theLinkedTreePhonebook!");
-		do{
-			System.out.println("\n Please choose an option:\n 1.Add a contact\n 2. Search for a contact\n 3.Delete a contact\n 4.Scheduleanevent\n 5.Printeventdetails\n 6.Printcontacts byfirstname\n 7. Print all events alphabetically\n 8.Exit");
-			System.out.println("Enter your choice:");
-			action = input.nextInt();
+		int action; //0
+		Scanner input = new Scanner(System.in) ; //1
+		System.out.println("Welcome to theLinkedTreePhonebook!"); //1
+		do{ //0
+			System.out.println("\n Please choose an option:\n 1.Add a contact\n 2. Search for a contact\n 3.Delete a contact\n 4.Scheduleanevent\n 5.Printeventdetails\n 6.Printcontacts byfirstname\n 7. Print all events alphabetically\n 8.Exit"); //1
+			System.out.println("Enter your choice:"); //1
+			action = input.nextInt() ; //1
 
 			switch (action){
 				case 1:
-					System.out.println("Enter the contact's name:");
-					String name = input.nextLine();
-					System.out.println("Enter the contact's phone number:");
-					String  phoneNumber = input.nextLine();
-					System.out.println("Enter the contact's email address:");
-					String emailAddress = input.nextLine();
-					System.out.println(" Enter the contact's address:");
-					String address = input.nextLine();
-					System.out.println("Enter the contact's birthday:");
-					String birthday = input.nextLine();
-					System.out.println("Enter any notes for the contact:");
-					String notes = input.nextLine();
-					this.ContactList.add(new Contact(name,phoneNumber,emailAddress,birthday,address,notes));
-					break;
+					System.out.println("Enter the contact's name:"); //1
+					String name = input.nextLine(); //1
+					System.out.println("Enter the contact's phone number:"); //1
+					String  phoneNumber = input.nextLine(); //1
+					System.out.println("Enter the contact's email address:"); //1
+					String emailAddress = input.nextLine(); //1
+					System.out.println(" Enter the contact's address:"); //1
+					String address = input.nextLine(); //1
+					System.out.println("Enter the contact's birthday:"); //1
+					String birthday = input.nextLine(); //1
+					System.out.println("Enter any notes for the contact:"); //1
+					String notes = input.nextLine(); //1
+					this.ContactList.add(new Contact(name,phoneNumber,emailAddress,birthday,address,notes)); //mln
+					break; //1
+					// 18+mln
 				case 2:
-					System.out.println("Enter search criteria:\n 1.Name\n 2.Phone Number\n 3.Email Address\n 4.Address\n 5.Birthday");
-					System.out.println("Enter your choice:");
-					int criteria= input.nextInt();
+					System.out.println("Enter search criteria:\n 1.Name\n 2.Phone Number\n 3.Email Address\n 4.Address\n 5.Birthday"); //1
+					System.out.println("Enter your choice:"); //1
+					int criteria= input.nextInt(); //1
 					switch(criteria){
 						case 1:
-							System.out.println("Enter the contact's name:");
-							System.out.println("Contact found!"+this.ContactList.SearchByName(input.nextLine()).toString());
-							break;
+							System.out.println("Enter the contact's name:"); //1
+							System.out.println("Contact found!"+this.ContactList.SearchByName(input.nextLine()).toString()); //m
+							break; //1
 						case 2:
-							System.out.println("Enter the contact's Phone Number:");
-							System.out.println("Contact found!"+this.ContactList.SearchByPhoneNumber(input.nextLine()).toString());
-							break;
+							System.out.println("Enter the contact's Phone Number:"); //1
+							System.out.println("Contact found!"+this.ContactList.SearchByPhoneNumber(input.nextLine()).toString()); //mn
+							break; //1
 						case 3:
-							System.out.println("Enter the contact's Email Address:");
-//							System.out.println("Contact found!"+this.ContactList.SearchByEmailAddress(input.nextLine()).toString());// method should return contact
+							System.out.println("Enter the contact's Email Address:"); //1
+//							System.out.println("Contact found!"+this.ContactList.SearchByEmailAddress(input.nextLine()).toString());// mn		 method should return contact
 							break;
 						case 4:
-							System.out.println("Enter the contact's Address:");
-//							System.out.println("Contact found!"+this.ContactList.SearchByAddress(input.nextLine()).toString());// method should return contact
+							System.out.println("Enter the contact's Address:"); //1
+//							System.out.println("Contact found!"+this.ContactList.SearchByAddress(input.nextLine()).toString());//mn			 method should return contact
 							break;
 						case 5:
-							System.out.println("Enter the contact's Birthday:");
-//							System.out.println("Contact found!"+this.ContactList.SearchByBirthday(input.nextLine()).toString());// method should return contact
-							break;
+							System.out.println("Enter the contact's Birthday:"); //1
+//							System.out.println("Contact found!"+this.ContactList.SearchByBirthday(input.nextLine()).toString());//mn+m		 method should return contact
+							break; //1
 					}
-					break;
+					break; //1
+					
+					//  10+4mn+2m 
 				case 3:
-					System.out.println("Enter the contact's name:");
-					this.ContactList.Delete(this.ContactList.SearchByName(input.nextLine()));
-					System.out.println("Contact has been deleted successfully :)");
-					break;
+					System.out.println("Enter the contact's name:"); //1
+					this.ContactList.Delete(this.ContactList.SearchByName(input.nextLine()));// m+(m+n)
+					System.out.println("Contact has been deleted successfully :)"); //1
+					break;//1
 				case 4:
-					Event eventToAdd = new Event();
-					System.out.println("Enter event title:");
-					String Title = input.nextLine();
-					System.out.println("Enter contact name:");
-					String ContactName = input.nextLine();
-					System.out.println("Enter event date and time ");
-					String date_time = input.nextLine();
-					System.out.println("Enter event location:");
-					String location = input.nextLine();
-					//required: seperating date and time +adding event method with contact
-					System.out.println(eventToAdd.toString()+"Event scheduled successfully!");
-					break;
+					this.scheduleEvent(); //m+n^2+mn
+					break; //1
 				case 5:
-					System.out.println("Enter search criteria:\n 1.contact name\n 2.Event title");
-					System.out.println("Enter your choice");
-					int criteriaToSearch = input.nextInt();
-					switch(criteriaToSearch){
+					System.out.println("Enter search criteria:\n 1.contact name\n 2.Event title"); //1
+					System.out.println("Enter your choice"); //1
+					int criteriaToSearch = input.nextInt(); //1
+					switch(criteriaToSearch){ 
 						case 1:
-							System.out.println("Enter the contact name:");
+							System.out.println("Enter the contact name:"); //1
 							String contactName = input.nextLine();
-							//Printeventdetails by contactname method
-							System.out.println("Event found!");
-							break;
+							printEventByContactName(contactName); //m
+							System.out.println("Event found!"); //1
+							break; //1
 						case 2:
-							System.out.println("Enter the event title:");
-							String title = input.nextLine();
-							//Printeventdetails by event title method
-							System.out.println("Event found!");
-							break;
+							System.out.println("Enter the event title:"); //1
+							String title = input.nextLine(); //1
+							printcontactSharingE_title(title);
+							System.out.println("Event found!"); //1
+							break; //1
 					}
-					break;
+					break; //1
+					
+					//  15 + m + (m+n) + m+ n^2 +mn + m = 15+4m+n+mn+n^2
 				case 6:
-					System.out.println("Enter the firstname:");
-					String firstname = input.nextLine();
-					ContactList.PrintContactByFirstName(firstname);
-					System.out.println("Contacts found!");
-					break;
+					System.out.println("Enter the firstname:"); //1
+					String firstname = input.nextLine(); //1
+					ContactList.PrintContactByFirstName(firstname); //mn+n+m
+					System.out.println("Contacts found!"); //1
+					break; //1
 				case 7:
-					//Print all events alphabetically method
-					break;
+					printEventsAlphabetically(); //m
+					break; //1
 			}
-		}while (action != 8);
-		System.exit(0);
+			
+			//5+mn+n+2m
+		}while (action != 8); 
+		System.exit(0); //1 
+		// 18+mln + 10+4mn+2m  + 5+mn+n+2m  + 15+4m+n+mn+n^2= mln +6mn +n^2+8m+2n+48 >>o(mln +mn +n^2+m+n )
 	}
+	
+	
 	
     public static void main(String[] args) {//testing area 
     	
