@@ -89,11 +89,7 @@ public class PhoneBook {
 			current=current.next;//m
 		}
 	}//2+6m+2mn >> o(mn+m)
-	
-	
 
-	//printEventsAlphabetically and insertToSortedList not yet tested, need scheduleEvent to be implemented
-      //print all events ordered alphabetically by event title
         public void printEventsAlphabetically() {
             Node current = EventList.head; //1
             while (current != null) { //m+1
@@ -102,38 +98,6 @@ public class PhoneBook {
             }
         }//3m+2 >> o(m)
 
-	//printing all contacts that share the first name
-	public void printContactShareName( String name) { 
-		Node<Contact> current=ContactList.head;
-		String ContactName , firstName;
-		while(current!=null) {
-			ContactName= ((Contact) current.data).getName();
-			String[] fullName= ContactName.split(" ");
-			firstName= fullName[0];
-
-			if(firstName.equals(name)) {
-				System.out.println("Contacts found!");
-				System.out.println( current.data.toString());
-			}
-			current=current.next;
-		}
-	}
-
-	//printEventsAlphabetically and insertToSortedList not yet tested, need scheduleEvent to be implemented
-      //print all events ordered alphabetically by event title
-        public void printEventsAlphabetically() {
-
-            Node current = EventList.head;
-            while (current != null) {
-                System.out.println(current.data.toString());
-                current = current.next;
-            }
-        }
-
-
-
-
-        
         public void printEventByContactName(String contactName) {
         	Contact contactToFind = ContactList.SearchByName(contactName); //m
         	Node<Event> temp = contactToFind.scheduledEvents.head; //1
@@ -157,11 +121,7 @@ public class PhoneBook {
         		tmpContacts=tmpContacts.next;
         	}
         }
-        
-        
 
-
-	
 	public void API() {//CLI for the application
 		int action; //0
 		Scanner input = new Scanner(System.in) ; //1
