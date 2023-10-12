@@ -1,11 +1,14 @@
 public class Event  {
     
     String title;
+
     String date;
+
     String time;
+
     String location;
+
     Contact contact ;
- 
 
     public Event() {
         this.title = ""; //1
@@ -20,8 +23,7 @@ public class Event  {
         this.time = time; //1
         this.location = location; //1
         this.contact = contact ; //1
-       // 5 > o(1)
-    }
+    }// 5 > o(1)
 
     public void setTitle(String title) {
         this.title = title; //1
@@ -67,7 +69,6 @@ public class Event  {
         return contact.toString(); //1
         // o(1)
     }
-
     @Override
     public String toString() {
         return "Event{" + "title=" + title + ", date=" + date + ", time=" + time + ", location=" + location + '}';
@@ -92,10 +93,6 @@ public class Event  {
             } return 0;//1
         }else
             return-1;//1
-    }//10-2+2n+3l =8+2n+3l>> O (n+l)
-    //2n+2+1+2n+2+3n+2[(n-1)(2n+2)]+7= 4n^2+7n+10 >>O(n^2)
-   
-   
+    }//2n+2+1+2n+2+3n+2[(n-1)(2n+2)]+7= 4n^2+7n+10 >>O(n^2)
 
-
-}
+}//class

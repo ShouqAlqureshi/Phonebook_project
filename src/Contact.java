@@ -1,7 +1,9 @@
 import java.util.LinkedList;
 
 public class Contact implements Comparable<Contact> {
+
     private String Name,Phone_Number,Email_Address,Birthday,Address;
+
     String note;
 
     EventLinkedList scheduledEvents = new EventLinkedList();
@@ -75,19 +77,10 @@ public class Contact implements Comparable<Contact> {
             } return 0;//1
         }else
             return-1;// 1
-    }//1+1+1+n+n+l+(l-1)(2n+2)+1+(l-1)(2n+2)+1+2+1+1+1 = 10+2[(n-1)(2n+2)]+l+2n = 5l-2n+4ln+6 >> O(ln)
-    //2n+2+2n+2+1+n+n+n+2[(n-1)(2n+2)]+7= 12+3n+4n^2-4 = 8+3n+4n^2 >> O(n^2)
+    }//2n+2+2n+2+1+n+n+n+2[(n-1)(2n+2)]+7= 12+3n+4n^2-4 = 8+3n+4n^2 >> O(n^2)
+
     public String toString(){//O(1)
         return getClass().getName()+"name: "+getName()+"\tPhone Number:"+getPhone_Number()+"\tAddress: "+getAddress()+"\nEmail_Address: "+getEmail_Address()+"\tBirthday: "+ getBirthday()+"\n note: "+note+"";
     }
-//    public boolean checkConflict(String time, String date ){}
 
-    public static void main(String[] args) {//testing area
-        Contact c1=new Contact("bb", "05937636532","jnjnjnj","nnk222","299","njnj");
-        Contact c2=new Contact("bb", "7968867456","njnjnj","mmkmkm","klll","njnj");
-       int i= c1.compareTo(c2);
-        System.out.println(i);
-        LinkedList list=new LinkedList();
-        list.add(c1);
-    }
 }//class
