@@ -201,8 +201,8 @@ public class ContactLinkedListADT {
         }
     }//3+4m >>O(m)
 
-    public static void printContact_name( ContactLinkedListADT contactList, String name) {//printing all contacts that share the first name
-        Node<Contact> current = contactList.head;//1
+    public void PrintContactByFirstName(  String name) {//printing all contacts that share the first name
+        Node<Contact> current = this.head;//1
         String ContactName , firstName;//0
         while(current != null) {//m+1
             ContactName = ((Contact) current.data).getName();//m
@@ -217,8 +217,5 @@ public class ContactLinkedListADT {
         }
     }//2+6m+2mn >>O(mn+m)*
 
-    public void PrintContactByFirstName(String firstname){//O(mn+n+m)*
-        printContact_name(this,firstname);
-    }
 
 }//class
