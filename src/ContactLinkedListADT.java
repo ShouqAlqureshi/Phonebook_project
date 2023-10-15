@@ -10,212 +10,202 @@ public class ContactLinkedListADT {
     }
 
     public void add(Contact contactToInsert) {//tested &done
-        if (isUniqueContact(contactToInsert)) {//mln
-            if (this.head == null) {//1
-                insertToSortedList(new Node<Contact>(contactToInsert));// ln+m
-                System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");//1
-                return;//1
+        if (isUniqueContact(contactToInsert)) {
+            if (this.head == null) {
+                insertToSortedList(new Node<Contact>(contactToInsert));
+                System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");
+                return;
             }
-            if (current.next == null) {// 1                     # current will be last element,and it's next is null (last in first out)
-                insertToSortedList(new Node<Contact>(contactToInsert));//ln+m
-            } else if (hasNext()) {// 1                          #current will be the new element ,and it will be in the middle of the list
-                insertToSortedList(new Node<Contact>(contactToInsert));//ln+m
+            if (current.next == null) {// current will be last element,and it's next is null (last in first out)
+                insertToSortedList(new Node<Contact>(contactToInsert));
+            } else if (hasNext()) {//current will be the new element ,and it will be in the middle of the list
+                insertToSortedList(new Node<Contact>(contactToInsert));
             }
 
-            System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");//1
-            return;//1
+            System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");
+            return;
         }
-        System.out.println(contactToInsert.toString() + "\n is already added to the phonebook :) ");//1
-    }//8+mln+3[ln+m]= 8+mln+3ln+3m >> O(mln)
+        System.out.println(contactToInsert.toString() + "\n is already added to the phonebook :) ");
+    }
 
-    public void Delete(Contact contactToRemove) {//remove at current which is item// done & tested
-        current = findNode(contactToRemove);// n+m
-        if (current == null) {//1
-            return;//1
+    public void Delete(Contact contactToRemove) {//remove at current which is item
+        current = findNode(contactToRemove);
+        if (current == null) {
+            return;
         }
-        if (current == head) {//1
-            head = head.next;//1
+        if (current == head) {
+            head = head.next;
         } else {
-            Node<Contact> temp = head;//1
+            Node<Contact> temp = head;
 
-            while (temp.next.data != current.data) {//m+1
-                if (temp.next == null)//m
-                    break;//1
-                temp = temp.next;//m
+            while (temp.next.data != current.data) {
+                if (temp.next == null)
+                    break;
+                temp = temp.next;
             }
 
-            temp.next = current.next;//1             #current.next=null
+            temp.next = current.next;//current.next=null
         }
-        if (current.next == null)//1
-            current = head;//1
+        if (current.next == null)
+            current = head;
         else
-            current = current.next;//1
-    }//11+n+m+m+m+m = 11+4m+n >> O(n+m)
+            current = current.next;
+    }
 
     public Node<Contact> findNode(Contact dataToFind) {
-        current = head;//1
-        while (!current.data.getName().equals(dataToFind.getName())) {// (mn+n) *   n= char
+        current = head;
+        while (!current.data.getName().equals(dataToFind.getName())) {
 
-            if (current.next == null) {//m
-                System.out.println(dataToFind.toString() + "\n##does n't exist in contact list");//1
-                return null;//1
+            if (current.next == null) {
+                System.out.println(dataToFind.toString() + "\n##does n't exist in contact list");
+                return null;
             }
-            current = current.next;//m
+            current = current.next;
         }
-        return current;//1
-    }//4+n+m+m+nm= 4+2m+n+mn >> O(n+mn+m)
+        return current;
+    }
 
     public Contact SearchByName( String name ) {  //done and tested
-      Node<Contact> tmp = head;//1
-      while(tmp != null) {// m+1
-        if (tmp.data.getName().equals(name)){//m
-            System.out.println("Contact found!\t" + tmp.data.toString()); //m
-          return tmp.data;//1
+      Node<Contact> tmp = head;
+      while(tmp != null) {
+        if (tmp.data.getName().equals(name)){
+            System.out.println("Contact found!\t" + tmp.data.toString());
+          return tmp.data;
         }
-        tmp=tmp.next;//m
+        tmp=tmp.next;
         }
         System.out.println("could n't found contact ");
-        return null;//1
-    }//4+3m >> O(m)
+        return null;
+    }
 
-    public Contact SearchByPhoneNumber( String PhoneNumber ){  //done and tested
-    	Node<Contact> tmp = head;//1
-    	while(tmp != null) {//m+1
-    		if (tmp.data.getPhone_Number().equals(PhoneNumber)){//m(n)
-                System.out.println("Contact found!\t" + tmp.data.toString()); //m
-            return tmp.data;//1
+    public Contact SearchByPhoneNumber( String PhoneNumber ){
+    	Node<Contact> tmp = head;
+    	while(tmp != null) {
+    		if (tmp.data.getPhone_Number().equals(PhoneNumber)){
+                System.out.println("Contact found!\t" + tmp.data.toString());
+            return tmp.data;
             }
-    		tmp=tmp.next;//m
+    		tmp=tmp.next;
     	}
         System.out.println("could n't found contact ");
-    	return null;//1
-    }//4+2m+mn >> O(mn)
+    	return null;
+    }
 
     public void SearchByEmailAddress(String EmailAddress ){// done
-        if (head != null){//1
-           current = head; //1
-            while (current.next != null)//m+1-1* //-1 because last node is not reached
+        if (head != null){
+           current = head;
+            while (current.next != null)
                 {
-                    if (current.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//mn-n
+                    if (current.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
                     {
-                        System.out.println("Contact found!\t" + current.retrieve().toString());//m-1
+                        System.out.println("Contact found!\t" + current.retrieve().toString());
                     }
-                    current = current.next;//m-1
+                    current = current.next;
                 }
-            if (current.data.getEmail_Address().equalsIgnoreCase(EmailAddress))//n
+            if (current.data.getEmail_Address().equalsIgnoreCase(EmailAddress))
                     {
-                        System.out.print(current.retrieve().toString());//1
+                        System.out.print(current.retrieve().toString());
                     }
         }else{
         System.out.println("could n't found contact ");
         }
-    }//3-2+mn-n+m+m+m+n= 1+3m+mn >> O(mn) *
+    }
 
     public void SearchByAddress(String Address ) {// done
-         if (head != null)//1
+         if (head != null)
         {
-           current = head; //1
-            while (current.next != null)//m+1-1*
+           current = head;
+            while (current.next != null)
                 {
-                    if (current.data.getAddress().equalsIgnoreCase(Address))//(mn-n)
+                    if (current.data.getAddress().equalsIgnoreCase(Address))
                     {
-                        System.out.print("Contact found!\t" + current.retrieve().toString());//(m-1)
+                        System.out.print("Contact found!\t" + current.retrieve().toString());
                     }
-                    current = current.next;//(m-1)
+                    current = current.next;
                 }
-            if (current.data.getAddress().equalsIgnoreCase(Address))//n
+            if (current.data.getAddress().equalsIgnoreCase(Address))
                     {
-                        System.out.print(current.retrieve().toString());//1
-                    }
-        }else{
-             System.out.println("could n't found contact ");
-         }
-    }//1+m+mn-n+m+m+n = 1+3m+mn >> O(mn)*
-
-    public void SearchByBirthday(String Birthday ) {// done
-         if (head != null) //1
-        {
-           current = head; //1
-            while (current.next != null) //m+1-1
-                {
-                    if (current.data.getBirthday().equalsIgnoreCase(Birthday)) //(mn-n)
-                    {
-                        System.out.print("Contact found!\t" + current.retrieve().toString()); //(m-1)
-                    }
-                    current = current.next; //(m-1)
-                }
-            if (current.data.getBirthday().equalsIgnoreCase(Birthday)) //n
-                    {
-                        System.out.print(current.retrieve().toString()); //1
+                        System.out.print(current.retrieve().toString());
                     }
         }else{
              System.out.println("could n't found contact ");
          }
     }
 
-    public boolean hasNext() {//1
+    public void SearchByBirthday(String Birthday ) {// done
+         if (head != null)
+        {
+           current = head;
+            while (current.next != null) //
+                {
+                    if (current.data.getBirthday().equalsIgnoreCase(Birthday))
+                    {
+                        System.out.print("Contact found!\t" + current.retrieve().toString());
+                    }
+                    current = current.next;
+                }
+            if (current.data.getBirthday().equalsIgnoreCase(Birthday))
+                    {
+                        System.out.print(current.retrieve().toString());
+                    }
+        }else{
+             System.out.println("could n't found contact ");
+         }
+    }
+
+    public boolean hasNext() {
         return current.next != null;
     }
 
     public void insertToSortedList(Node<Contact> unsortedElement){
-        if (head == null || head.data.compareTo(unsortedElement.data) == 1 || head.data.compareTo(unsortedElement.data) == 0) {// 2ln *              #head.data >= unsortedElement.data
-            unsortedElement.next = head;// 1
-            current = head;// 1
-            head = unsortedElement;//1
+        if (head == null || head.data.compareTo(unsortedElement.data) == 1 || head.data.compareTo(unsortedElement.data) == 0) {//head.data >= unsortedElement.data
+            unsortedElement.next = head;
+            current = head;
+            head = unsortedElement;
         }
         else {
-            current = head; //1
-            while (current.next != null && current.next.data.compareTo(unsortedElement.data) == -1 ){// m+ln+1                #current.next.data < unsortedElement.data
-                current = current.next;//m+ln **
+            current = head;
+            while (current.next != null && current.next.data.compareTo(unsortedElement.data) == -1 ){//current.next.data < unsortedElement.data
+                current = current.next;
             }//the trick is to assign after looping
-            unsortedElement.next = current.next;//1
-            current.next = unsortedElement;//1
-            current = current.next;//1
+            unsortedElement.next = current.next;
+            current.next = unsortedElement;
+            current = current.next;
         }
-    }// 1+1+1+1+1+1+1+1+2ln+m+ln+m+ln= 8+4ln+2m >> O(ln+m) *
+    }
 
     public boolean isUniqueContact(Contact contact){//current position after method: current will be the last element
-        if (this.head==null){// 1
-            return true;// 1
+        if (this.head==null){
+            return true;
         }
-        this.current = this.head;//1
-        while (current != null) {// m+1 *
+        this.current = this.head;
+        while (current != null) {
 
-            if (contact.compareTo(this.current.data) == 0){// m(ln) *
-                return false;//1
+            if (contact.compareTo(this.current.data) == 0){
+                return false;
             }
-            if(current.next == null) //m
-                break;// 1
-            current = current.next;//m
+            if(current.next == null)
+                break;
+            current = current.next;
         }
-        return true;// 1
-    }// 1+1+1+1+1+1+m+1+m(ln)+2m = 7+ 3m + mln >> O(mln+m) m= nodes n= string characters *
-
-    public void printAllContacts(){
-        this.current = this.head;//1
-        while (current != null) {//m+1         first element is checked
-            System.out.println("++++++++\n" + current.data.toString() + "\n_________\n");//m
-            if(current.next == null)//m
-                break;//1
-            current = current.next;//m
-        }
-    }//3+4m >>O(m)
+        return true;
+    }
 
     public void PrintContactByFirstName(  String name) {//printing all contacts that share the first name
-        Node<Contact> current = this.head;//1
-        String ContactName , firstName;//0
-        while(current != null) {//m+1
-            ContactName = ((Contact) current.data).getName();//m
-            String[] fullName = ContactName.split(" ");//m(n)
-            firstName = fullName[0];//m
+        Node<Contact> current = this.head;
+        String ContactName , firstName;
+        while(current != null) {
+            ContactName = ((Contact) current.data).getName();
+            String[] fullName = ContactName.split(" ");
+            firstName = fullName[0];
 
             if(firstName.equals(name)) {//(m)n
-                System.out.println("Contacts found!");//m
-                System.out.println( current.data.toString());//m
+                System.out.println("Contacts found!");
+                System.out.println( current.data.toString());
             }
-            current = current.next;//m
+            current = current.next;
         }
-    }//2+6m+2mn >>O(mn+m)*
+    }
 
 
 }//class

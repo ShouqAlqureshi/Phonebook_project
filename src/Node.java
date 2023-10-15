@@ -5,13 +5,11 @@ public class Node <T>{
    Node<T> next;
 
     public Node(T data) {
-        this.data = data; //1
-        this.next = null; //1
-        //o(1)
+        this.data = data;
+        this.next = null;
     }
 
     public T retrieve () {
-
         return data;
     }
 

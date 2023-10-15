@@ -11,88 +11,79 @@ public class Event  {
     Contact contact ;
 
     public Event() {
-        this.title = ""; //1
-        this.date = null; //1
-        this.time = ""; //1
-        this.location = ""; //1
+        this.title = "";
+        this.date = null;
+        this.time = "";
+        this.location = "";
     }
    
     public Event(String title, String date, String time, String location, Contact contact) {
-        this.title = title; //1
-        this.date = date; //1
-        this.time = time; //1
-        this.location = location; //1
-        this.contact = contact ; //1
-    }// 5 > o(1)
+        this.title = title;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.contact = contact ;
+    }
 
     public void setTitle(String title) {
-        this.title = title; //1
-        // o(1)
+        this.title = title;
     }
 
     public void setDate(String date) {
-        this.date = date; //1
-        // o(1)
+        this.date = date;
     }
 
     public void setTime(String time) {
-        this.time = time; //1
-        //o(1)
+        this.time = time;
     }
 
     public void setLocation(String location) {
-        this.location = location; //1
-        // o(1)
+        this.location = location;
     }
 
     public String getTitle() {
-        return title; //1
-        //o(1)
+        return title;
     }
 
     public String getDate() {
-        return date; //1
-        // o(1)
+        return date;
     }
 
     public String getTime() {
-        return time; //1
-        // o(1)
+        return time;
     }
 
     public String getLocation() {
-        return location; //1
-        // o(1)
+        return location;
     }
 
     public String getContact() {
-        return contact.toString(); //1
-        // o(1)
+        return contact.toString();
     }
     @Override
     public String toString() {
         return "Event{" + "title=" + title + ", date=" + date + ", time=" + time + ", location=" + location + '}';
     }
 
-    public int comparing(Event event) {//tested & done
-        if (this.title.toUpperCase().charAt(0) > event.title.toUpperCase().charAt(0))//2n+2
-        return 1;//1
-        else if (this.title.toUpperCase().charAt(0) == event.title.toUpperCase().charAt(0)){//2n+2
-            int limit;//0
-            if(!this.title.equalsIgnoreCase(event.title)) {//n
-                limit = Math.min(this.title.length(), event.title.length());//n
-                for (int i = 1; i < limit; i++) {//n
-                   if (this.title.toUpperCase().charAt(i) > event.title.toUpperCase().charAt(i)) {//n-1(2n+2)
-                      return 1;//1                                   the only case I want to swap and change  so i will ignore -1
-                   } else if (this.title.toUpperCase().charAt(i) < event.title.toUpperCase().charAt(i)) {//n-1(2n+2)
-                      return -1;//1
+    public int comparing(Event event) {
+        if (this.title.toUpperCase().charAt(0) > event.title.toUpperCase().charAt(0))
+        return 1;
+        else if (this.title.toUpperCase().charAt(0) == event.title.toUpperCase().charAt(0)){
+            int limit;
+            if(!this.title.equalsIgnoreCase(event.title)) {
+                limit = Math.min(this.title.length(), event.title.length());
+                for (int i = 1; i < limit; i++) {
+                   if (this.title.toUpperCase().charAt(i) > event.title.toUpperCase().charAt(i)) {
+                      return 1;//the only case I want to swap and change  so i will ignore -1
+                   } else if (this.title.toUpperCase().charAt(i) < event.title.toUpperCase().charAt(i)) {
+                      return -1;
                    }
                 }
-                if ( this.title.length() != event.title.length())//2
-                    return 2;//1
-            } return 0;//1
+                if ( this.title.length() != event.title.length())
+                    return 2;
+            } return 0;
         }else
-            return-1;//1
-    }//2n+2+1+2n+2+3n+2[(n-1)(2n+2)]+7= 4n^2+7n+10 >>O(n^2)
+            return-1;
+    }
 
 }//class

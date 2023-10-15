@@ -4,9 +4,8 @@ public class EventLinkedList {
     Node<Event> current;
 
     public EventLinkedList() {
-        this.head = null; //1
-        this.current = null; //1
-        //o(1)
+        this.head = null;
+        this.current = null;
     }
     public void insertToSortedList(Event toBeSorted) {
         Node<Event> unsortedElement = new Node<Event>(toBeSorted);
@@ -17,7 +16,7 @@ public class EventLinkedList {
         }
         else {
         	this.current = this.head;
-            while (this.current.next != null &&   this.head.data.comparing(unsortedElement.data) == -1 ){//current.next.data < unsortedElement.data
+            while (this.current.next != null && this.head.data.comparing(unsortedElement.data) == -1 ){//current.next.data < unsortedElement.data
             	this.current = this.current.next;//to check sorting
             }
             unsortedElement.next = (Node<Event>) this.current.next;

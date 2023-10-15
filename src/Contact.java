@@ -58,28 +58,28 @@ public class Contact implements Comparable<Contact> {
     }
 
     @Override
-    public int compareTo(Contact contact) {//tested & done
-        if (this.Name.toUpperCase().charAt(0) > contact.getName().toUpperCase().charAt(0))//  1(2n+2)
-        return 1;// 1
-        else if (this.Name.toUpperCase().charAt(0) == contact.getName().toUpperCase().charAt(0)){// 1(2n+2)
-            int limit;//0
-            if(!this.Name.equalsIgnoreCase(contact.getName())) { // n
-                limit = Math.min(this.Name.length(), contact.getName().length());//n
-                for (int i = 1; i < limit; i++) {// n
-                   if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)) {// (n-1)(2n+2)
-                      return 1;//  1                                                                                              the only case I want to swap and change  so i will ignore -1
-                   } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {//(n-1)(2n+2)
-                      return -1;// 1
+    public int compareTo(Contact contact) {
+        if (this.Name.toUpperCase().charAt(0) > contact.getName().toUpperCase().charAt(0))
+        return 1;
+        else if (this.Name.toUpperCase().charAt(0) == contact.getName().toUpperCase().charAt(0)){
+            int limit;
+            if(!this.Name.equalsIgnoreCase(contact.getName())) {
+                limit = Math.min(this.Name.length(), contact.getName().length());
+                for (int i = 1; i < limit; i++) {
+                   if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)) {
+                      return 1;// the only case I want to swap and change  so i will ignore -1
+                   } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {
+                      return -1;
                    }
                 }
                 if ( this.Name.length() != contact.getName().length())// 2
-                    return 2;//1
-            } return 0;//1
+                    return 2;
+            } return 0;
         }else
-            return-1;// 1
-    }//2n+2+2n+2+1+n+n+n+2[(n-1)(2n+2)]+7= 12+3n+4n^2-4 = 8+3n+4n^2 >> O(n^2)
+            return-1;
+    }
 
-    public String toString(){//O(1)
+    public String toString(){
         return getClass().getName()+"name: "+getName()+"\tPhone Number:"+getPhone_Number()+"\tAddress: "+getAddress()+"\nEmail_Address: "+getEmail_Address()+"\tBirthday: "+ getBirthday()+"\n note: "+note+"";
     }
 
