@@ -15,10 +15,12 @@ public class PhoneBook {
         String eventTitle = input.nextLine(); //1
         System.out.print("Enter contact name"); //1
         String contactName = input.nextLine(); //1
-        if( ContactList.SearchByName(contactName) != null ){ //m
-            eventContact = ContactList.SearchByName(contactName) ; //m
+		eventContact = ContactList.SearchByName(contactName);
+        if( eventContact != null ){ //m
+			//m
             System.out.print("Enter event date and time MM/DD/YYYY HH:MM"); //1
             String eventTime_Date= input.nextLine(); //1
+			input.nextLine();
             String[] Time_Date = eventTime_Date.split(" "); //n
              eventDate= Time_Date[0]; //1
              eventTime= Time_Date[1]; //1
@@ -146,11 +148,10 @@ public class PhoneBook {
 		do{ //0
 			System.out.println("\n Please choose an option:\n 1.Add a contact\n 2. Search for a contact\n 3.Delete a contact\n 4.Scheduleanevent\n 5.Printeventdetails\n 6.Printcontacts byfirstname\n 7. Print all events alphabetically\n 8.Exit"); //1
 			System.out.println("Enter your choice:"); //1
-			action = input.nextInt() ; //1
+			action = Integer.parseInt(input.nextLine()); //1
 			switch (action){
 				case 1:
 					System.out.println("Enter the contact's name:"); //1
-					input.nextLine();
 					String name = input.nextLine(); //1
 					System.out.println("Enter the contact's phone number:"); //1
 					String  phoneNumber = input.nextLine(); //1
@@ -172,40 +173,35 @@ public class PhoneBook {
 				case 2:
 					System.out.println("Enter search criteria:\n 1.Name\n 2.Phone Number\n 3.Email Address\n 4.Address\n 5.Birthday"); //1
 					System.out.println("Enter your choice:"); //1
-					input.nextLine();
-					int criteria= input.nextInt(); //1
+					int criteria= Integer.parseInt(input.nextLine()); //1
 					switch(criteria){
 						case 1:
 							System.out.println("Enter the contact's name:"); //1
-							input.nextLine();
 							this.ContactList.SearchByName(input.nextLine()); //m
 							break; //1
 						case 2:
 							System.out.println("Enter the contact's Phone Number:"); //1
-							input.nextLine();
 							this.ContactList.SearchByPhoneNumber(input.nextLine()); //mn
 							break; //1
 						case 3:
 							System.out.println("Enter the contact's Email Address:"); //1
-							input.nextLine();
 							this.ContactList.SearchByEmailAddress(input.nextLine());// mn
 							break;
 						case 4:
 							System.out.println("Enter the contact's Address:"); //1
-							input.nextLine();
 							this.ContactList.SearchByAddress(input.nextLine());//mn
 							break;
 						case 5:
 							System.out.println("Enter the contact's Birthday:"); //1
-							input.nextLine();
 							this.ContactList.SearchByBirthday(input.nextLine());//mn+m
 							break; //1
 					}
 					break; //1
 				case 3:
 					System.out.println("Enter the contact's name:"); //1
-					input.nextLine();
-					this.ContactList.Delete(this.ContactList.SearchByName(input.nextLine()));// m+(m+n)
+					Contact contactToDelete = this.ContactList.SearchByName(input.nextLine());
+					this.deleteEvents(contactToDelete.scheduledEvents);
+					this.ContactList.Delete(contactToDelete);// m+(m+n)
 					System.out.println("Contact has been deleted successfully :)"); //1
 					break;//1
 				case 4:
@@ -214,19 +210,16 @@ public class PhoneBook {
 				case 5:
 					System.out.println("Enter search criteria:\n 1.contact name\n 2.Event title"); //1
 					System.out.println("Enter your choice"); //1
-					input.nextLine();
 					int criteriaToSearch = input.nextInt(); //1
 					switch(criteriaToSearch){ 
 						case 1:
 							System.out.println("Enter the contact name:"); //1
-							input.nextLine();
 							String contactName = input.nextLine();
 							printEventByContactName(contactName); //m
 							System.out.println("Event found!"); //1
 							break; //1
 						case 2:
 							System.out.println("Enter the event title:"); //1
-							input.nextLine();
 							String title = input.nextLine(); //1
 							printEventSharingE_title(title);
 							System.out.println("Event found!"); //1
@@ -235,7 +228,6 @@ public class PhoneBook {
 					break; //1
 				case 6:
 					System.out.println("Enter the firstname:"); //1
-					input.nextLine();
 					String firstname = input.nextLine(); //1
 					ContactList.PrintContactByFirstName(firstname); //mn+n+m
 					System.out.println("Contacts found!"); //1
