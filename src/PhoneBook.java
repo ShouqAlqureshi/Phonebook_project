@@ -41,10 +41,11 @@ public class PhoneBook {
 	}
    
     public boolean checkConflict(Contact c , String time , String Date){
-    	Node<Event> tmp = EventList.head;
+    	Node<Event> tmp = c.scheduledEvents.head;
     	while(tmp != null) {
     		if(tmp.data.getDate().equals(Date) && tmp.data.getTime().equals(time))
     			return true;
+			tmp = tmp.next;
     	}
     	return false;
     }
