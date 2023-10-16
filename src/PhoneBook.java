@@ -49,14 +49,13 @@ public class PhoneBook {
     	}
     	return false;
     }
-
 		
    //delete all events of specific contact from the general events linked list
     public void deleteEvents(EventLinkedList contactEventList) {
     	Node<Event> nodeContactEvents = contactEventList.head;
-    	Node<Event> nodeAllEvents = EventList.head;
-    	
+    	Node<Event> nodeAllEvents;
     	while (nodeContactEvents != null) {
+			nodeAllEvents = EventList.head;
     		while ( nodeAllEvents != null) {
     			if ( nodeContactEvents.data.title.equals(nodeAllEvents.data.title) && nodeContactEvents.data.time.equals(nodeAllEvents.data.time) && nodeContactEvents.data.date.equals(nodeAllEvents.data.date) && nodeContactEvents.data.location.equals(nodeAllEvents.data.location) ) {
     				if (nodeAllEvents == EventList.head) {
@@ -81,8 +80,8 @@ public class PhoneBook {
     			nodeAllEvents = nodeAllEvents.next;
     			}
     		nodeContactEvents = nodeContactEvents.next;
-    		}
-    	}
+		}
+	}
 
 	public void printContactShareEvent(Event e) { //printing all contacts that share an event
 		Node<Event> current = EventList.head ;
@@ -208,7 +207,7 @@ public class PhoneBook {
 				case 5:
 					System.out.println("Enter search criteria:\n 1.contact name\n 2.Event title");
 					System.out.println("Enter your choice");
-					int criteriaToSearch = input.nextInt();
+					int criteriaToSearch = Integer.parseInt(input.nextLine());
 					switch(criteriaToSearch){ 
 						case 1:
 							System.out.println("Enter the contact name:");
