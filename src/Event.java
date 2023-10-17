@@ -74,7 +74,7 @@ public class Event  {
                 limit = Math.min(this.title.length(), event.title.length());
                 for (int i = 1; i < limit; i++) {
                    if (this.title.toUpperCase().charAt(i) > event.title.toUpperCase().charAt(i)) {
-                      return 1;//the only case I want to swap and change  so i will ignore -1
+                      return 1;
                    } else if (this.title.toUpperCase().charAt(i) < event.title.toUpperCase().charAt(i)) {
                       return -1;
                    }

@@ -49,8 +49,7 @@ public class PhoneBook {
     	}
     	return false;
     }
-		
-   //delete all events of specific contact from the general events linked list
+
     public void deleteEvents(EventLinkedList contactEventList) {
     	Node<Event> nodeContactEvents = contactEventList.head;
     	Node<Event> nodeAllEvents;
@@ -83,7 +82,7 @@ public class PhoneBook {
 		}
 	}
 
-	public void printContactShareEvent(Event e) { //printing all contacts that share an event
+	public void printContactShareEvent(Event e) {
 		Node<Event> current = EventList.head ;
 		while (current != null) {
 			if (  current.data.getTitle().equals(e.getTitle())  )
@@ -95,7 +94,7 @@ public class PhoneBook {
 		}
 	}
 
-	public void printContactShareName( String name) { // printing all contacts that share the first name
+	public void printContactShareName( String name) {
 		Node<Contact> current = ContactList.head;
 		String ContactName , firstName;
 		while(current != null) {
@@ -128,7 +127,7 @@ public class PhoneBook {
         }
     }
         
-    public void printEventSharingE_title(String EventTitle) {//print event sharing title
+    public void printEventSharingE_title(String EventTitle) {
        	Node<Event> tmpEvents = this.EventList.head;
         while(tmpEvents != null) {
         	if (tmpEvents.data.title.equalsIgnoreCase(EventTitle))
@@ -138,7 +137,7 @@ public class PhoneBook {
 
 	}
 
-	public void API() {//CLI for the application
+	public void API() {
 		int action;
 		Scanner input = new Scanner(System.in) ;
 		System.out.println("Welcome to theLinkedTreePhonebook!");
@@ -236,18 +235,5 @@ public class PhoneBook {
 		}while (action != 8); 
 		System.exit(0);
 	}
-
-    public static void main(String[] args) {//testing area 
-    	
-		PhoneBook test = new PhoneBook();
-		Contact c1 = new Contact("ahmad", "0506958651", "shooq@gmail.com", "3/4/2003", "almalqa","299");
-		Contact c2 = new Contact("Ahmad Alzaid", "0506958651", "shooq@gmail.com", "3/4/2003", "almalqa","299");
-		Contact c3 = new Contact("Ahmad AlSaud", "0506958651", "shooq@gmail.com", "3/4/2003", "almalqa","299");
-
-		test.ContactList.add(c1);
-		test.ContactList.add(c2);
-		test.ContactList.add(c3);
-		test.API();
-    }
 
 }//class
