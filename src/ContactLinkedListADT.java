@@ -4,21 +4,21 @@ public class ContactLinkedListADT {
 
     Node<Contact> current;
 
-    public ContactLinkedListADT() {// O(1)
+    public ContactLinkedListADT() {
         this.head = null;
         this.current = null;
     }
 
-    public void add(Contact contactToInsert) {//tested &done
+    public void add(Contact contactToInsert) {
         if (isUniqueContact(contactToInsert)) {
             if (this.head == null) {
                 insertToSortedList(new Node<Contact>(contactToInsert));
                 System.out.println(contactToInsert.toString() + "\n##has been added to the phonebook successfully ;)");
                 return;
             }
-            if (current.next == null) {// current will be last element,and it's next is null (last in first out)
+            if (current.next == null) {
                 insertToSortedList(new Node<Contact>(contactToInsert));
-            } else if (hasNext()) {//current will be the new element ,and it will be in the middle of the list
+            } else if (hasNext()) {
                 insertToSortedList(new Node<Contact>(contactToInsert));
             }
 
@@ -28,7 +28,7 @@ public class ContactLinkedListADT {
         System.out.println(contactToInsert.toString() + "\n is already added to the phonebook :) ");
     }
 
-    public void Delete(Contact contactToRemove) {//remove at current which is item
+    public void Delete(Contact contactToRemove) {
         current = findNode(contactToRemove);
         if (current == null) {
             return;
@@ -44,7 +44,7 @@ public class ContactLinkedListADT {
                 temp = temp.next;
             }
 
-            temp.next = current.next;//current.next=null
+            temp.next = current.next;
         }
         if (current.next == null)
             current = head;
@@ -65,7 +65,7 @@ public class ContactLinkedListADT {
         return current;
     }
 
-    public Contact SearchByName( String name ) {  //done and tested
+    public Contact SearchByName( String name ) {
       Node<Contact> tmp = head;
       while(tmp != null) {
         if (tmp.data.getName().equals(name)){
@@ -91,7 +91,7 @@ public class ContactLinkedListADT {
     	return null;
     }
 
-    public void SearchByEmailAddress(String EmailAddress ){// done
+    public void SearchByEmailAddress(String EmailAddress ){
         if (head != null){
            current = head;
             while (current.next != null)
@@ -111,7 +111,7 @@ public class ContactLinkedListADT {
         }
     }
 
-    public void SearchByAddress(String Address ) {// done
+    public void SearchByAddress(String Address ) {
          if (head != null)
         {
            current = head;
@@ -132,11 +132,11 @@ public class ContactLinkedListADT {
          }
     }
 
-    public void SearchByBirthday(String Birthday ) {// done
+    public void SearchByBirthday(String Birthday ) {
          if (head != null)
         {
            current = head;
-            while (current.next != null) //
+            while (current.next != null)
                 {
                     if (current.data.getBirthday().equalsIgnoreCase(Birthday))
                     {
@@ -158,23 +158,23 @@ public class ContactLinkedListADT {
     }
 
     public void insertToSortedList(Node<Contact> unsortedElement){
-        if (head == null || head.data.compareTo(unsortedElement.data) == 1 || head.data.compareTo(unsortedElement.data) == 0) {//head.data >= unsortedElement.data
+        if (head == null || head.data.compareTo(unsortedElement.data) == 1 || head.data.compareTo(unsortedElement.data) == 0) {
             unsortedElement.next = head;
             current = head;
             head = unsortedElement;
         }
         else {
             current = head;
-            while (current.next != null && current.next.data.compareTo(unsortedElement.data) == -1 ){//current.next.data < unsortedElement.data
+            while (current.next != null && current.next.data.compareTo(unsortedElement.data) == -1 ){
                 current = current.next;
-            }//the trick is to assign after looping
+            }
             unsortedElement.next = current.next;
             current.next = unsortedElement;
             current = current.next;
         }
     }
 
-    public boolean isUniqueContact(Contact contact){//current position after method: current will be the last element
+    public boolean isUniqueContact(Contact contact){
         if (this.head==null){
             return true;
         }
@@ -191,7 +191,7 @@ public class ContactLinkedListADT {
         return true;
     }
 
-    public void PrintContactByFirstName(  String name) {//printing all contacts that share the first name
+    public void PrintContactByFirstName(  String name) {
         Node<Contact> current = this.head;
         String ContactName , firstName;
         while(current != null) {

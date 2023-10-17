@@ -67,12 +67,12 @@ public class Contact implements Comparable<Contact> {
                 limit = Math.min(this.Name.length(), contact.getName().length());
                 for (int i = 1; i < limit; i++) {
                    if (this.Name.toUpperCase().charAt(i) > contact.getName().toUpperCase().charAt(i)) {
-                      return 1;// the only case I want to swap and change  so i will ignore -1
+                      return 1;
                    } else if (this.Name.toUpperCase().charAt(i) < contact.getName().toUpperCase().charAt(i)) {
                       return -1;
                    }
                 }
-                if ( this.Name.length() != contact.getName().length())// 2
+                if ( this.Name.length() != contact.getName().length())
                     return 2;
             } return 0;
         }else
